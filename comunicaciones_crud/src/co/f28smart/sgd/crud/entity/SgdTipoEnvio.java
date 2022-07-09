@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = "SgdTipoEnvio.findAll", query = "select o from SgdTipoEnvio o") })
 @Table(name = "SGD_TIPO_ENVIO")
 public class SgdTipoEnvio implements Serializable {
-    private static final long serialVersionUID = 5418651374264245187L;
+    @SuppressWarnings("compatibility:-2506303304378009510")
+    private static final long serialVersionUID = 1L;
     @Column(length = 50)
     private String codigo;
     @Column(length = 200)

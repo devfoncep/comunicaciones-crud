@@ -20,11 +20,13 @@ import javax.persistence.TemporalType;
 @Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdDependencia.findAll", query = "select o from SgdDependencia o"),
                 @NamedQuery(name = "SgdDependencia.findDependencias", 
-                            query = "select distinct o.codigoDependencia, o.dependencia from SgdDependencia o order by o.dependencia asc")
+                            query = "select d from SgdDependencia d where d.vigente = 1 order by d.dependencia asc")
                 })
 @Table(name = "SGD_DEPENDENCIA")
 public class SgdDependencia implements Serializable {
-    private static final long serialVersionUID = -1954197074414569564L;
+    @SuppressWarnings("compatibility:-3968501279788307754")
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "CODIGO_DEPENDENCIA", nullable = false, length = 100)
     private String codigoDependencia;

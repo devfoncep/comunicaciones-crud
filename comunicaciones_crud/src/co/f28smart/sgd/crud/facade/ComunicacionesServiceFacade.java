@@ -638,8 +638,8 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdTipoTramite.findAll", SgdTipoTramite.class).getResultList();
     }
     
-    public List<Object[]> getSgdDependenciaFindDependencias() {
-        return em.createNamedQuery("SgdSubCategoria.findDependencias").getResultList();
+    public List<SgdDependencia> getSgdDependenciaFindDependencias() {
+        return em.createNamedQuery("SgdDependencia.findDependencias", SgdDependencia.class).getResultList();
     }
     
     public List<SgdTipoComInterna> getSgdTipoComInternaFindAll() {

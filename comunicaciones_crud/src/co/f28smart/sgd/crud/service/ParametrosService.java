@@ -12,9 +12,15 @@ import co.f28smart.sgd.crud.facade.WebCCServiceFacade;
 
 import com.oracle.wls.shaded.org.apache.bcel.generic.Select;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 import javax.faces.model.SelectItem;
@@ -24,6 +30,7 @@ import org.apache.log4j.Logger;
 public class ParametrosService {
     private Logger logger;
 
+    private String ROOTFFOLDERGUID = "E26ECFA5F5CEC2EE3888DE55739BE9F4";
 
     private List<SelectItem> tipoTramites = new ArrayList<>();
     private List<SelectItem> tipoEnvios = new ArrayList<>();
@@ -44,26 +51,43 @@ public class ParametrosService {
     private List<SelectItem> etnias = new ArrayList<>();
     private List<SelectItem> rangoEdades = new ArrayList<>();
     private List<SelectItem> entidades = new ArrayList<>();
+    private List<SelectItem> tiposDocumentales = new ArrayList<>();
+
 
 
     final ComunicacionesServiceFacade comunicacionesService;
     final WebCCServiceFacade webCCServiceFacade = new WebCCServiceFacade();
 
 
-    public ParametrosService() {
+    public ParametrosService(String ridcPropertiesFileName) {
         super();
         logger = Logger.getLogger(this.getClass().getSimpleName());
         logger.debug("# " + this.getClass().getSimpleName());
+        
+        Properties ridcProperties = new Properties();
+        String ruta = System.getProperty("user.dir") + "/config/SGD/"+ridcPropertiesFileName;
+        InputStream input = null;
+        try{
+            input = new FileInputStream(ruta);
+            ridcProperties.load(input);
+        } catch (FileNotFoundException e) {
+            logger.error("Archivo "+ruta+" no encontrado",e);
+        } catch (IOException e) {
+            logger.error("Error al leer el archivo "+ruta,e);
+        }
+        Object o = ridcProperties.get("ROOTFFOLDERGUID");
 
         comunicacionesService = new ComunicacionesServiceFacade();
 
         loadTipoTramites();
         loadTipoEnvios();
-        loadCategorias();
-        //loadProcesos();
-        //loadSeries();
-        //loadSubseries();
-        //loadExpedientes();
+        if(o!= null){
+            logger.debug("ROOTFFOLDERGUID :"+o);
+            loadCategorias(o.toString());
+        }else{
+            loadCategorias(ROOTFFOLDERGUID);
+        }
+
         loadDependencias();
         loadTipoAnexosFisicos();
         loadAccionesRespuesta();
@@ -75,8 +99,18 @@ public class ParametrosService {
         loadPoblacionVulnerable();
         loadEtnias();
         loadRangoEdades();
+        loadTiposDocumentales();
 
     }
+    
+    private void loadTiposDocumentales() {
+        this.tiposDocumentales.add(new SelectItem(1, "Tipo documental 1"));
+        this.tiposDocumentales.add(new SelectItem(2, "Tipo documental 2"));
+        this.tiposDocumentales.add(new SelectItem(3, "Tipo documental 3"));
+        this.tiposDocumentales.add(new SelectItem(4, "Tipo documental 4"));
+        this.tiposDocumentales.add(new SelectItem(5, "Tipo documental 5"));
+    }
+    
 
     private void loadEntidades() {
         this.rangoEdades = comunicacionesService.getSgdEntidadFindAll()
@@ -167,9 +201,8 @@ public class ParametrosService {
         }
     }
 
-    private void loadCategorias() {
-        Folderfolders folder = webCCServiceFacade.getFolderfoldersFindRoot();
-        this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(folder.getFfolderguid())
+    private void loadCategorias(String guid) {
+        this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
                                             .stream()
                                             .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
                                             .collect(Collectors.toList());
@@ -241,7 +274,7 @@ public class ParametrosService {
         try {
             this.dependencias = comunicacionesService.getSgdDependenciaFindDependencias()
                                                      .stream()
-                                                     .map(p -> new SelectItem(Integer.valueOf((String) p[0]), (String) p[1]))
+                                                     .map(p -> new SelectItem(p.getCodigoDependencia(), p.getDependencia()))
                                                      .collect(Collectors.toList());
         } catch (NumberFormatException nfe) {
             // TODO: Add catch code
@@ -416,7 +449,17 @@ public class ParametrosService {
     public List<SelectItem> getEntidades() {
         return entidades;
     }
-    
+
+
+    public void setTiposDocumentales(List<SelectItem> tiposDocumentales) {
+        this.tiposDocumentales = tiposDocumentales;
+    }
+
+    public List<SelectItem> getTiposDocumentales() {
+        return tiposDocumentales;
+    }
+
+
     public String findLabel(Object value, List<SelectItem> itemList) {
         String lable = "";
         for (SelectItem si : itemList) {
