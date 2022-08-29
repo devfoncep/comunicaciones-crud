@@ -461,15 +461,15 @@ public class ParametrosService {
 
 
     public String findLabel(Object value, List<SelectItem> itemList) {
-        String lable = "";
+        String label = "";
         for (SelectItem si : itemList) {
             if (si.getValue().equals(value)) {
-                lable = si.getLabel();
+                label = si.getLabel();
                 break;
             }
         }
-        if (lable != null && !lable.isEmpty()) {
-            return lable;
+        if (label != null && !label.isEmpty()) {
+            return label;
         } else {
             return "";
         }

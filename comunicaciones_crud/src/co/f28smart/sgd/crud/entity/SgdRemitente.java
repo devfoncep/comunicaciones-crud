@@ -20,13 +20,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "SgdRemitente.findAll", query = "select o from SgdRemitente o"),
-                @NamedQuery(name = "SgdRemitente.findByIdNameNit",
+                @NamedQuery(name = "SgdRemitente.findByIdName",
                             query =
-                            "select o from SgdRemitente o where lower(o.nombreCompleto) like :nombre or o.noIdentificacion = :id or o.nitEntidad = :nit order by o.nombreCompleto asc")
+                            "select o from SgdRemitente o where lower(o.nombreCompleto) like :nombre or o.noIdentificacion = :id order by o.nombreCompleto asc")
     })
 @Table(name = "SGD_REMITENTE")
 public class SgdRemitente implements Serializable {
-    private static final long serialVersionUID = 4513687236400617391L;
+    @SuppressWarnings("compatibility:4447139950794451058")
+    private static final long serialVersionUID = 1L;
     @Column(length = 20)
     private String cargo;
     @Column(length = 20)
@@ -54,7 +55,7 @@ public class SgdRemitente implements Serializable {
     @Column(name = "ID_RANGO_EDAD")
     private BigDecimal idRangoEdad;
     @Column(name = "ID_TIPO_IDENTIFICACION", nullable = false)
-    private BigDecimal idTipoIdentificacion;
+    private Integer idTipoIdentificacion;
     @Column(name = "NOMBRE_COMPLETO", nullable = false, length = 50)
     private String nombreCompleto;
     @Id
@@ -77,7 +78,7 @@ public class SgdRemitente implements Serializable {
     public SgdRemitente(String cargo, String celular, String direccion, String email, Date fechaActualizacion,
                         Date fechaCreacion, BigDecimal idDepartamento, BigDecimal idEtnia, BigDecimal idMunicipio,
                         BigDecimal idPais, BigDecimal idPoblacionVulnerable, BigDecimal idRangoEdad,
-                        BigDecimal idTipoIdentificacion, BigDecimal nitEntidad, BigDecimal noIdentificacion,
+                        Integer idTipoIdentificacion, BigDecimal nitEntidad, BigDecimal noIdentificacion,
                         String nombreCompleto, String telefono, String titulo, String usuarioActualizacion,
                         String usuarioCreacion) {
         this.cargo = cargo;
@@ -199,11 +200,11 @@ public class SgdRemitente implements Serializable {
         this.idRangoEdad = idRangoEdad;
     }
 
-    public BigDecimal getIdTipoIdentificacion() {
+    public Integer getIdTipoIdentificacion() {
         return idTipoIdentificacion;
     }
 
-    public void setIdTipoIdentificacion(BigDecimal idTipoIdentificacion) {
+    public void setIdTipoIdentificacion(Integer idTipoIdentificacion) {
         this.idTipoIdentificacion = idTipoIdentificacion;
     }
 

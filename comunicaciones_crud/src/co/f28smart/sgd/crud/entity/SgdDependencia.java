@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdDependencia.findAll", query = "select o from SgdDependencia o"),
+                @NamedQuery(name = "SgdDependencia.findById", query = "select o from SgdDependencia o where o.codigoDependencia = :param"),
                 @NamedQuery(name = "SgdDependencia.findDependencias", 
                             query = "select d from SgdDependencia d where d.vigente = 1 order by d.dependencia asc")
                 })
@@ -48,6 +49,8 @@ public class SgdDependencia implements Serializable {
     private String usuarioModificacion;
     @Column(nullable = false)
     private BigDecimal vigente;
+    @Column
+    private String ciudad;
 
     public SgdDependencia() {
     }
@@ -136,5 +139,13 @@ public class SgdDependencia implements Serializable {
 
     public void setVigente(BigDecimal vigente) {
         this.vigente = vigente;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getCiudad() {
+        return ciudad;
     }
 }

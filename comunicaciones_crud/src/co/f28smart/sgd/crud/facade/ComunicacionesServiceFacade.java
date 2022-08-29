@@ -142,7 +142,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdPais);
         commitTransaction();
     }
-    
+
     public List<SgdPais> getSgdPaisFindAll() {
         return em.createNamedQuery("SgdPais.findAll", SgdPais.class).getResultList();
         //return em.createNativeQuery("select o from SgdPais o", SgdPais.class).getResultList();
@@ -166,7 +166,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdEtnia);
         commitTransaction();
     }
-    
+
     public List<SgdEtnia> getSgdEtniaFindAll() {
         return em.createNamedQuery("SgdEtnia.findAll", SgdEtnia.class).getResultList();
     }
@@ -189,7 +189,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdDepartamento);
         commitTransaction();
     }
-    
+
     public List<SgdDepartamento> getSgdDepartamentoFindAll() {
         return em.createNamedQuery("SgdDepartamento.findAll", SgdDepartamento.class).getResultList();
     }
@@ -231,10 +231,11 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdMunicipio);
         commitTransaction();
     }
-    
+
     public List<SgdMunicipio> getSgdMunicipioFindByDepto(final Long idDepto) {
         return em.createNamedQuery("SgdMunicipio.findByDepto", SgdMunicipio.class)
-                 .setParameter("param", idDepto).getResultList();
+                 .setParameter("param", idDepto)
+                 .getResultList();
     }
 
     public SgdRangoEdad persistSgdRangoEdad(SgdRangoEdad sgdRangoEdad) {
@@ -255,7 +256,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdRangoEdad);
         commitTransaction();
     }
-    
+
     public List<SgdRangoEdad> getSgdRangoEdadFindAll() {
         return em.createNamedQuery("SgdRangoEdad.findAll", SgdRangoEdad.class).getResultList();
     }
@@ -312,11 +313,11 @@ public class ComunicacionesServiceFacade {
     }
 
     public void removeSgdComunicacionesView(SgdComunicacionesView sgdComunicacionesView) {
-//        sgdComunicacionesView =
-//            em.find(SgdComunicacionesView.class, sgdComunicacionesView.getNroRadicado(),
-//                    sgdComunicacionesView.getNumeroIdentificacion());
-//        em.remove(sgdComunicacionesView);
-//        commitTransaction();
+        //        sgdComunicacionesView =
+        //            em.find(SgdComunicacionesView.class, sgdComunicacionesView.getNroRadicado(),
+        //                    sgdComunicacionesView.getNumeroIdentificacion());
+        //        em.remove(sgdComunicacionesView);
+        //        commitTransaction();
     }
 
     public SgdUsuarioRol persistSgdUsuarioRol(SgdUsuarioRol sgdUsuarioRol) {
@@ -350,7 +351,7 @@ public class ComunicacionesServiceFacade {
         commitTransaction();
         return entity;
     }
-    
+
     public List<SgdTipoIdentificacion> getSgdTipoIdentificacionFindAll() {
         return em.createNamedQuery("SgdTipoIdentificacion.findAll", SgdTipoIdentificacion.class).getResultList();
     }
@@ -379,23 +380,27 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdUsuario);
         commitTransaction();
     }
-    
+
     public List<SgdUsuario> getSgdUsuarioFindAll() {
         return em.createNamedQuery("SgdUsuario.findAll", SgdUsuario.class).getResultList();
     }
-    
+
     public SgdUsuario getSgdUsuarioFindById(final String idUsuario) {
         return em.createNamedQuery("SgdUsuario.findById", SgdUsuario.class)
-                 .setParameter("param", idUsuario).getSingleResult();
+                 .setParameter("param", idUsuario)
+                 .getSingleResult();
     }
-    
+
     public List<SgdUsuario> getSgdUsuarioFindByDependencia(final Long idDependencia) {
         return em.createNamedQuery("SgdUsuario.findByDependencia", SgdUsuario.class)
-                 .setParameter("param", idDependencia).getResultList();
+                 .setParameter("param", idDependencia)
+                 .getResultList();
     }
+
     public List<SgdUsuario> getSgdUsuarioFindByApprovers(final Long idDependencia) {
         return em.createNamedQuery("SgdUsuario.findByDependencyApprovers", SgdUsuario.class)
-                 .setParameter("param", idDependencia).getResultList();
+                 .setParameter("param", idDependencia)
+                 .getResultList();
     }
 
     public SgdInteresado persistSgdInteresado(SgdInteresado sgdInteresado) {
@@ -454,7 +459,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdTipoSolicitud);
         commitTransaction();
     }
-    
+
     public List<SgdTipoSolicitud> getSgdTipoSolicitudFindAll() {
         return em.createNamedQuery("SgdTipoSolicitud.findAll", SgdTipoSolicitud.class).getResultList();
     }
@@ -477,7 +482,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdOcupacion);
         commitTransaction();
     }
-    
+
     public List<SgdOcupacion> getSgdOcupacionFindAll() {
         return em.createNamedQuery("SgdOcupacion.findAll", SgdOcupacion.class).getResultList();
     }
@@ -539,7 +544,7 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdPoblacionVulnerable);
         commitTransaction();
     }
-    
+
     public List<SgdPoblacionVulnerable> getSgdPoblacionVulnerableFindAll() {
         return em.createNamedQuery("SgdPoblacionVulnerable.findAll", SgdPoblacionVulnerable.class).getResultList();
     }
@@ -581,67 +586,77 @@ public class ComunicacionesServiceFacade {
         em.remove(sgdComunicacionPrqsAud);
         commitTransaction();
     }
-    
+
     public List<SgdTipoEnvio> getSgdTipoEnvioFindAll() {
         return em.createNamedQuery("SgdTipoEnvio.findAll", SgdTipoEnvio.class).getResultList();
     }
-    
+
     public List<SgdTipoAnexoFisico> getSgdTipoAnexoFisicoFindAll() {
         return em.createNamedQuery("SgdTipoAnexoFisico.findAll", SgdTipoAnexoFisico.class).getResultList();
     }
-    
+
     public List<SgdAccionRespuesta> getSgdAccionRespuestaFindAll() {
         return em.createNamedQuery("SgdAccionRespuesta.findAll", SgdAccionRespuesta.class).getResultList();
     }
-    
+
     public List<SgdTipoEmpresa> getSgdTipoEmpresaFindAll() {
         return em.createNamedQuery("SgdTipoEmpresa.findAll", SgdTipoEmpresa.class).getResultList();
     }
-    
+
     public List<SgdTipoTitulo> getSgdTipoTituloFindAll() {
         return em.createNamedQuery("SgdTipoTitulo.findAll", SgdTipoTitulo.class).getResultList();
     }
-    
+
     public List<SgdEntidad> getSgdEntidadFindAll() {
         return em.createNamedQuery("SgdEntidad.findAll", SgdEntidad.class).getResultList();
     }
+
     public SgdEntidad getSgdEntidadFindById(BigDecimal id) {
-        return em.createNamedQuery("SgdEntidad.findById", SgdEntidad.class).setParameter("id", id).getSingleResult();
+        return em.createNamedQuery("SgdEntidad.findById", SgdEntidad.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
     }
+
     public List<SgdEntidad> getSgdEntidadFindByNameNit(int nit, String nombre) {
         String parsedString = "";
-        if (nombre != null && !nombre.isEmpty()){
-            parsedString = "%"+nombre.toLowerCase().replace(' ', '%')+"%";
+        if (nombre != null && !nombre.isEmpty()) {
+            parsedString = "%" + nombre.toLowerCase().replace(' ', '%') + "%";
         }
         return em.createNamedQuery("SgdEntidad.findByNameNit", SgdEntidad.class)
                  .setParameter("nit", nit)
                  .setParameter("nombre", parsedString)
                  .getResultList();
     }
-    
+
     public List<SgdRemitente> getSgdRemitenteFindAll() {
         return em.createNamedQuery("SgdEntidad.findAll", SgdRemitente.class).getResultList();
     }
-    public List<SgdRemitente> getSgdRemitenteFindByIdNombreNit(int id,String nombre, int nit ) {
+
+    public List<SgdRemitente> getSgdRemitenteFindByIdNombre(Integer id, String nombre) {
         String parsedString = "";
-        if (nombre != null && !nombre.isEmpty()){
-            parsedString = "%"+nombre.toLowerCase().replace(' ', '%')+"%";
+        if (nombre != null && !nombre.isEmpty()) {
+            parsedString = "%" + nombre.toLowerCase().replace(' ', '%') + "%";
         }
-        return em.createNamedQuery("SgdRemitente.findByIdNameNit", SgdRemitente.class)
-                 .setParameter("nit", nit)
+        return em.createNamedQuery("SgdRemitente.findByIdName", SgdRemitente.class)
                  .setParameter("nombre", parsedString)
                  .setParameter("id", id)
                  .getResultList();
     }
-    
+
     public List<SgdTipoTramite> getSgdTipoTramiteFindAll() {
         return em.createNamedQuery("SgdTipoTramite.findAll", SgdTipoTramite.class).getResultList();
     }
-    
+
     public List<SgdDependencia> getSgdDependenciaFindDependencias() {
         return em.createNamedQuery("SgdDependencia.findDependencias", SgdDependencia.class).getResultList();
     }
-    
+
+    public SgdDependencia getSgdDependenciaFindByID(String id) {
+        return em.createNamedQuery("SgdDependencia.findById", SgdDependencia.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
+    }
+
     public List<SgdTipoComInterna> getSgdTipoComInternaFindAll() {
         return em.createNamedQuery("SgdTipoComInterna.findAll", SgdTipoComInterna.class).getResultList();
     }
