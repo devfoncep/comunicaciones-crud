@@ -21,6 +21,8 @@ import co.f28smart.sgd.crud.entity.SgdReasignacionComAudit;
 import co.f28smart.sgd.crud.entity.SgdRemitente;
 import co.f28smart.sgd.crud.entity.SgdRol;
 import co.f28smart.sgd.crud.entity.SgdDependencia;
+import co.f28smart.sgd.crud.entity.SgdGruposValor;
+import co.f28smart.sgd.crud.entity.SgdParentesco;
 import co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico;
 import co.f28smart.sgd.crud.entity.SgdTipoComInterna;
 import co.f28smart.sgd.crud.entity.SgdTipoEmpresa;
@@ -659,5 +661,13 @@ public class ComunicacionesServiceFacade {
 
     public List<SgdTipoComInterna> getSgdTipoComInternaFindAll() {
         return em.createNamedQuery("SgdTipoComInterna.findAll", SgdTipoComInterna.class).getResultList();
+    }
+    
+    public List<SgdGruposValor> getSgdGruposValorFindAll() {
+        return em.createNamedQuery("SgdGruposValor.findAll", SgdGruposValor.class).getResultList();
+    }
+
+    public List<SgdParentesco> getSgdParentescoFindAll() {
+        return em.createNamedQuery("SgdParentesco.findAll", SgdParentesco.class).getResultList();
     }
 }

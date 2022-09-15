@@ -39,6 +39,8 @@
         <class>co.f28smart.sgd.crud.entity.SgdDepartamento</class>
         <class>co.f28smart.sgd.crud.entity.SgdUsuarioRol</class>
         <class>co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico</class>
+        <class>co.f28smart.sgd.crud.entity.SgdParentesco</class>
+        <class>co.f28smart.sgd.crud.entity.SgdGruposValor</class>
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="jdbc/ComunicacionesDS"/>

@@ -52,6 +52,8 @@ public class ParametrosService {
     private List<SelectItem> rangoEdades = new ArrayList<>();
     private List<SelectItem> entidades = new ArrayList<>();
     private List<SelectItem> tiposDocumentales = new ArrayList<>();
+    private List<SelectItem> parentescos = new ArrayList<>();
+    private List<SelectItem> gruposValor = new ArrayList<>();
 
 
 
@@ -100,7 +102,8 @@ public class ParametrosService {
         loadEtnias();
         loadRangoEdades();
         loadTiposDocumentales();
-
+        loadGruposValor();
+        loadParentescos();
     }
     
     private void loadTiposDocumentales() {
@@ -113,7 +116,7 @@ public class ParametrosService {
     
 
     private void loadEntidades() {
-        this.rangoEdades = comunicacionesService.getSgdEntidadFindAll()
+        this.entidades = comunicacionesService.getSgdEntidadFindAll()
                                                 .stream()
                                                 .map(p -> new SelectItem(p.getIdEntidad(), p.getNombre()))
                                                 .collect(Collectors.toList());
@@ -360,6 +363,19 @@ public class ParametrosService {
         return usuarios;
 
     }
+    
+    private void loadGruposValor() {
+        this.gruposValor = comunicacionesService.getSgdGruposValorFindAll().stream()
+                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                       .collect(Collectors.toList());
+    }
+    
+    private void loadParentescos() {
+        this.parentescos = comunicacionesService.getSgdParentescoFindAll().stream()
+                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                       .collect(Collectors.toList());
+    }
+    
 
     public List<SelectItem> getTipoTramites() {
         return tipoTramites;
@@ -473,6 +489,22 @@ public class ParametrosService {
         } else {
             return "";
         }
+    }
+
+    public void setParentescos(List<SelectItem> parentescos) {
+        this.parentescos = parentescos;
+    }
+
+    public List<SelectItem> getParentescos() {
+        return parentescos;
+    }
+
+    public void setGruposValor(List<SelectItem> gruposValor) {
+        this.gruposValor = gruposValor;
+    }
+
+    public List<SelectItem> getGruposValor() {
+        return gruposValor;
     }
 }
 

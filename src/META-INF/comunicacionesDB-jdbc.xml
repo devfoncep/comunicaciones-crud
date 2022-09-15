@@ -4,7 +4,7 @@
                   xmlns="http://xmlns.oracle.com/weblogic/jdbc-data-source">
     <name>ComunicacionesDB</name>
     <jdbc-driver-params>
-        <url>jdbc:oracle:thin:@//localhost:1529/OSBPRU.ICA.GOV.CO</url>
+        <url>jdbc:oracle:thin:@//dbwcctest01.ica.gov.co:1529/OSBPRU.ICA.GOV.CO</url>
         <driver-name>oracle.jdbc.OracleDriver</driver-name>
         <properties>
             <property>
@@ -12,13 +12,12 @@
                 <value>COMUNICACIONES</value>
             </property>
         </properties>
-        <password-encrypted>059658ABA04258F8C2FB1E34E566F55B</password-encrypted>
+        <password-encrypted>E60F40D1EE5ABD5ECA70908AC3125046</password-encrypted>
     </jdbc-driver-params>
     <jdbc-connection-pool-params>
         <test-table-name>SQL SELECT 1 FROM DUAL</test-table-name>
     </jdbc-connection-pool-params>
     <jdbc-data-source-params>
-        <jndi-name>jdbc/comunicacionesDBDS</jndi-name>
         <jndi-name>jdbc/ComunicacionesDBDS</jndi-name>
         <scope>Application</scope>
     </jdbc-data-source-params>
