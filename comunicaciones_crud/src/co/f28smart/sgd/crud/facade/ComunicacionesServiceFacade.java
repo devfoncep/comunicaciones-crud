@@ -234,7 +234,7 @@ public class ComunicacionesServiceFacade {
         commitTransaction();
     }
 
-    public List<SgdMunicipio> getSgdMunicipioFindByDepto(final Long idDepto) {
+    public List<SgdMunicipio> getSgdMunicipioFindByDepto(final Integer idDepto) {
         return em.createNamedQuery("SgdMunicipio.findByDepto", SgdMunicipio.class)
                  .setParameter("param", idDepto)
                  .getResultList();

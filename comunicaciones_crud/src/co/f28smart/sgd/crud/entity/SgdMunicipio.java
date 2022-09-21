@@ -23,6 +23,10 @@ import javax.persistence.TemporalType;
 @Table(name = "SGD_MUNICIPIO")
 public class SgdMunicipio implements Serializable {
     private static final long serialVersionUID = -5431706259659274308L;
+    
+    @Id
+    @Column(name = "ID_MUNICIPIO", nullable = false)
+    private Integer idMunicipio;
     @Column(length = 6)
     private String codigo;
     @Temporal(TemporalType.DATE)
@@ -32,10 +36,7 @@ public class SgdMunicipio implements Serializable {
     @Column(name = "FECHA_MODIFICACION")
     private Date fechaModificacion;
     @Column(name = "ID_DEPARTAMENTO", nullable = false)
-    private Long idDepartamento;
-    @Id
-    @Column(name = "ID_MUNICIPIO", nullable = false)
-    private Long idMunicipio;
+    private Integer idDepartamento;
     @Column(name = "IP_CREACION", length = 20)
     private String ipCreacion;
     @Column(name = "IP_MODIFICACION", length = 20)
@@ -51,8 +52,8 @@ public class SgdMunicipio implements Serializable {
     public SgdMunicipio() {
     }
 
-    public SgdMunicipio(String codigo, Date fechaCreacion, Date fechaModificacion, Long idDepartamento,
-                        Long idMunicipio, String ipCreacion, String ipModificacion, String nombre,
+    public SgdMunicipio(String codigo, Date fechaCreacion, Date fechaModificacion, Integer idDepartamento,
+                        Integer idMunicipio, String ipCreacion, String ipModificacion, String nombre,
                         String usuarioCreacion, String usuarioModificacion, Integer vigente) {
         this.codigo = codigo;
         this.fechaCreacion = fechaCreacion;
@@ -91,19 +92,19 @@ public class SgdMunicipio implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public Long getIdDepartamento() {
+    public Integer getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(Long idDepartamento) {
+    public void setIdDepartamento(Integer idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 
-    public Long getIdMunicipio() {
+    public Integer getIdMunicipio() {
         return idMunicipio;
     }
 
-    public void setIdMunicipio(Long idMunicipio) {
+    public void setIdMunicipio(Integer idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
 

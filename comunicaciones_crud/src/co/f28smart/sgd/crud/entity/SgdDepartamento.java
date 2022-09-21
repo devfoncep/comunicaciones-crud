@@ -21,6 +21,10 @@ import javax.persistence.TemporalType;
 @Table(name = "SGD_DEPARTAMENTO")
 public class SgdDepartamento implements Serializable {
     private static final long serialVersionUID = -2443379136011167450L;
+    
+    @Id
+    @Column(name = "ID_DEPARTAMENTO", nullable = false)
+    private Integer idDepartamento;
     @Column(length = 6)
     private String codigo;
     @Temporal(TemporalType.DATE)
@@ -29,9 +33,6 @@ public class SgdDepartamento implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_MODIFICACION")
     private Date fechaModificacion;
-    @Id
-    @Column(name = "ID_DEPARTAMENTO", nullable = false)
-    private Long idDepartamento;
     @Column(name = "IP_CREACION", length = 20)
     private String ipCreacion;
     @Column(name = "IP_MODIFICACION", length = 20)
@@ -47,7 +48,7 @@ public class SgdDepartamento implements Serializable {
     public SgdDepartamento() {
     }
 
-    public SgdDepartamento(String codigo, Date fechaCreacion, Date fechaModificacion, Long idDepartamento,
+    public SgdDepartamento(String codigo, Date fechaCreacion, Date fechaModificacion, Integer idDepartamento,
                            String ipCreacion, String ipModificacion, String nombre, String usuarioCreacion,
                            String usuarioModificacion, Integer vigente) {
         this.codigo = codigo;
@@ -86,11 +87,11 @@ public class SgdDepartamento implements Serializable {
         this.fechaModificacion = fechaModificacion;
     }
 
-    public Long getIdDepartamento() {
+    public Integer getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(Long idDepartamento) {
+    public void setIdDepartamento(Integer idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 

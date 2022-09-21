@@ -260,7 +260,7 @@ public class ParametrosService {
                                                   .collect(Collectors.toList());
     }
 
-    public List<SelectItem> getMunicipioDepartamentos(Long codigoDepartamento) {
+    public List<SelectItem> getMunicipioDepartamentos(Integer codigoDepartamento) {
         List<SelectItem> ciudadMunicipios = new ArrayList<>();
         if (codigoDepartamento != null) {
             ciudadMunicipios = comunicacionesService.getSgdMunicipioFindByDepto(codigoDepartamento)
