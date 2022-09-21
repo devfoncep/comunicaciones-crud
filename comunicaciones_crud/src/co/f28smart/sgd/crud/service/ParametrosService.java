@@ -376,6 +376,13 @@ public class ParametrosService {
                                                        .collect(Collectors.toList());
     }
     
+    private List<SelectItem> getEntidadesByNitName(Integer nit, String name) {
+        return comunicacionesService.getSgdEntidadFindByNameNit(nit, name)
+                                                .stream()
+                                                .map(p -> new SelectItem(p.getIdEntidad(), p.getNombre()))
+                                                .collect(Collectors.toList());
+    }
+    
 
     public List<SelectItem> getTipoTramites() {
         return tipoTramites;

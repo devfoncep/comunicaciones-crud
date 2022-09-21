@@ -2,19 +2,12 @@ package co.f28smart.sgd.crud.entity;
 
 import java.io.Serializable;
 
-import java.math.BigDecimal;
-
 import java.util.Date;
-
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,6 +19,10 @@ import javax.persistence.TemporalType;
 @Table(name = "SGD_ENTIDAD")
 public class SgdEntidad implements Serializable {
     private static final long serialVersionUID = -5647801916819121870L;
+    
+    @Id
+    @Column(name = "ID_ENTIDAD", nullable = false)
+    private Long idEntidad;
     @Column(name = "APARTADO_AEREO", length = 20)
     private String apartadoAereo;
     @Column(length = 50)
@@ -45,16 +42,13 @@ public class SgdEntidad implements Serializable {
     @Column(name = "FECHA_CREACION")
     private Date fechaCreacion;
     @Column(name = "ID_DEPARTAMENTO")
-    private BigDecimal idDepartamento;
-    @Id
-    @Column(name = "ID_ENTIDAD", nullable = false)
-    private BigDecimal idEntidad;
+    private Long idDepartamento;
     @Column(name = "ID_MUNICIPIO")
-    private BigDecimal idMunicipio;
+    private Long idMunicipio;
     @Column(name = "ID_PAIS", nullable = false)
-    private BigDecimal idPais;
+    private Long idPais;
     @Column(name = "ID_TIPO_EMPRESA", nullable = false)
-    private BigDecimal idTipoEmpresa;
+    private Long idTipoEmpresa;
     @Column(nullable = false, length = 50)
     private String nombre;
     @Column(length = 20)
@@ -73,8 +67,8 @@ public class SgdEntidad implements Serializable {
     }
 
     public SgdEntidad(String apartadoAereo, String codigo, String descripcion, String direccion, String email,
-                      String fax, Date fechaActualizacion, Date fechaCreacion, BigDecimal idDepartamento,
-                      BigDecimal idEntidad, BigDecimal idMunicipio, BigDecimal idPais, BigDecimal idTipoEmpresa,
+                      String fax, Date fechaActualizacion, Date fechaCreacion, Long idDepartamento,
+                      Long idEntidad, Long idMunicipio, Long idPais, Long idTipoEmpresa,
                       String nombre, String oficina, String telefono, String usuarioActualizacion,
                       String usuarioCreacion, String website) {
         this.apartadoAereo = apartadoAereo;
@@ -163,43 +157,43 @@ public class SgdEntidad implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigDecimal getIdDepartamento() {
+    public Long getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(BigDecimal idDepartamento) {
+    public void setIdDepartamento(Long idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 
-    public BigDecimal getIdEntidad() {
+    public Long getIdEntidad() {
         return idEntidad;
     }
 
-    public void setIdEntidad(BigDecimal idEntidad) {
+    public void setIdEntidad(Long idEntidad) {
         this.idEntidad = idEntidad;
     }
 
-    public BigDecimal getIdMunicipio() {
+    public Long getIdMunicipio() {
         return idMunicipio;
     }
 
-    public void setIdMunicipio(BigDecimal idMunicipio) {
+    public void setIdMunicipio(Long idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
 
-    public BigDecimal getIdPais() {
+    public Long getIdPais() {
         return idPais;
     }
 
-    public void setIdPais(BigDecimal idPais) {
+    public void setIdPais(Long idPais) {
         this.idPais = idPais;
     }
 
-    public BigDecimal getIdTipoEmpresa() {
+    public Long getIdTipoEmpresa() {
         return idTipoEmpresa;
     }
 
-    public void setIdTipoEmpresa(BigDecimal idTipoEmpresa) {
+    public void setIdTipoEmpresa(Long idTipoEmpresa) {
         this.idTipoEmpresa = idTipoEmpresa;
     }
 

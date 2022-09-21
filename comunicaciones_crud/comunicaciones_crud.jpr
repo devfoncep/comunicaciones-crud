@@ -99,6 +99,9 @@
       </list>
    </hash>
    <hash n="oracle.jdeveloper.compiler.OjcConfiguration">
+      <list n="excludedUrls">
+         <string v="fXSLNonDeployedFiles"/>
+      </list>
       <value n="webIANAEncoding" v="UTF-8"/>
    </hash>
    <hash n="oracle.jdeveloper.deploy.dt.DeploymentProfiles">
