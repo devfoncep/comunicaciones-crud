@@ -19,15 +19,16 @@ import javax.persistence.Table;
 public class SgdTipoAnexoFisico implements Serializable {
     @SuppressWarnings("compatibility:2533630326169304756")
     private static final long serialVersionUID = -7372775295951483034L;
-    @Column(length = 50)
-    private String codigo;
-    @Column(length = 200)
-    private String descripcion;
+    
     @Id
     @Column(name = "ID_TIPO_ANEXO_FISICO", nullable = false)
     private Integer idTipoAnexoFisico;
     @Column(nullable = false, length = 30)
     private String nombre;
+    @Column(length = 50)
+    private String codigo;
+    @Column(length = 200)
+    private String descripcion;
 
     public SgdTipoAnexoFisico() {
     }

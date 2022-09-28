@@ -2,7 +2,9 @@ package co.f28smart.sgd.crud.service;
 
 
 import co.f28smart.sgd.crud.entity.Folderfolders;
+import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
+import co.f28smart.sgd.crud.entity.SgdPais;
 import co.f28smart.sgd.crud.entity.SgdPoblacionVulnerable;
 import co.f28smart.sgd.crud.entity.SgdRemitente;
 import co.f28smart.sgd.crud.entity.SgdTipoTramite;
@@ -54,7 +56,8 @@ public class ParametrosService {
     private List<SelectItem> tiposDocumentales = new ArrayList<>();
     private List<SelectItem> parentescos = new ArrayList<>();
     private List<SelectItem> gruposValor = new ArrayList<>();
-
+    private List<Requisito> requisitosTramite = new ArrayList<>();
+    private List<SelectItem> tiposCanal = new ArrayList<>();
 
 
     final ComunicacionesServiceFacade comunicacionesService;
@@ -104,6 +107,7 @@ public class ParametrosService {
         loadTiposDocumentales();
         loadGruposValor();
         loadParentescos();
+        loadRequisitosTramite();
     }
     
     private void loadTiposDocumentales() {
@@ -154,10 +158,13 @@ public class ParametrosService {
     }
 
     private void loadPaises() {
-        this.paises = comunicacionesService.getSgdPaisFindAll()
+        /*this.paises = comunicacionesService.getSgdPaisFindAll()
                                            .stream()
                                            .map(p -> new SelectItem(p.getId(), p.getNombre()))
-                                           .collect(Collectors.toList());
+                                           .collect(Collectors.toList());*/
+        for(SgdPais pais : comunicacionesService.getSgdPaisFindAll()) {
+            paises.add(new SelectItem(pais.getId(), pais.getNombre()));
+        }
     }
 
     private void loadTipoTramites() {
@@ -172,6 +179,15 @@ public class ParametrosService {
             this.tipoTramites.add(new SelectItem(1, "Memorando Circular"));
             this.tipoTramites.add(new SelectItem(2, "Circular Interna"));
 
+        }
+    }
+    
+    public SgdTipoTramite getTipoTramiteById(Integer id){
+        try {
+           return comunicacionesService.getSgdTipoTramiteFindById(id);
+        } catch (Exception e) {
+            logger.error("ParametrosService getTipoTramiteById Exception", e);
+            return null;
         }
     }
 
@@ -205,45 +221,54 @@ public class ParametrosService {
     }
 
     private void loadCategorias(String guid) {
-        this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
+        /*this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
                                             .stream()
                                             .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                            .collect(Collectors.toList());
+                                            .collect(Collectors.toList());*/
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(guid)) {
+            categorias.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
     }
 
     private void loadProcesos(String fParentGUID) {
 
-        this.procesos = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        /*this.procesos = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                           .stream()
                                           .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                          .collect(Collectors.toList());
-
-
+                                          .collect(Collectors.toList());*/
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            procesos.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
     }
 
     private void loadSeries(String fParentGUID) {
-        this.series = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        /*this.series = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                         .stream()
                                         .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                        .collect(Collectors.toList());
-
+                                        .collect(Collectors.toList());*/
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            series.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
     }
 
     private void loadSubseries(String fParentGUID) {
-        this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        /*this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                            .stream()
                                            .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                           .collect(Collectors.toList());
-
-
+                                           .collect(Collectors.toList());*/
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            subseries.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
     }
 
     private void loadExpedientes(String fParentGUID) {
-        this.expedientes = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        /*this.expedientes = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                              .stream()
                                              .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                             .collect(Collectors.toList());
-
+                                             .collect(Collectors.toList());*/
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            expedientes.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
     }
 
     private void loadTipoIdentificacion() {
@@ -338,11 +363,15 @@ public class ParametrosService {
             this.accionesRespuesta.add(new SelectItem(2, "Ejecución Cumplida"));
             this.accionesRespuesta.add(new SelectItem(3, "No Requiere Respuesta"));
             this.accionesRespuesta.add(new SelectItem(4, "Correo Electrónico"));
-
-
         }
-
     }
+    
+    private void loadRequisitosTramite() {
+        requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
+        requisitosTramite.add(new Requisito(1, "4333.2 - Copia del documento de identidad del solicitante por ambos lados", false));
+        requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
+    }
+    
 
     public List<SelectItem> getUsuarios(int codDependencia) {
         List<SelectItem> usuarios = new ArrayList<>();
@@ -362,6 +391,22 @@ public class ParametrosService {
                                         .collect(Collectors.toList());
         return usuarios;
 
+    }
+    
+    public List<SelectItem> getTipoCanalesByTipoCom(String tipoCom){
+        //F -> Fisica, E -> Electronica
+        if("F".equals(tipoCom)){
+            tiposCanal.clear();
+            tiposCanal.add(new SelectItem("MENSAJERIA", "Empresa Mensajeria"));
+            tiposCanal.add(new SelectItem("PRESENCIAL", "Presencial"));
+        }else{
+            tiposCanal.clear();
+            tiposCanal.add(new SelectItem("MAIL", "Mail"));
+            tiposCanal.add(new SelectItem("PAGINA", "Pagina Web"));
+            tiposCanal.add(new SelectItem("REDES", "Redes Sociales"));
+            tiposCanal.add(new SelectItem("TELEFONO", "Telefonico"));
+        }
+        return tiposCanal;
     }
     
     private void loadGruposValor() {
@@ -510,6 +555,14 @@ public class ParametrosService {
 
     public List<SelectItem> getGruposValor() {
         return gruposValor;
+    }
+
+    public void setRequisitosTramite(List<Requisito> requisitosTramite) {
+        this.requisitosTramite = requisitosTramite;
+    }
+
+    public List<Requisito> getRequisitosTramite() {
+        return requisitosTramite;
     }
 }
 

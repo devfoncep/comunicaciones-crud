@@ -648,6 +648,12 @@ public class ComunicacionesServiceFacade {
     public List<SgdTipoTramite> getSgdTipoTramiteFindAll() {
         return em.createNamedQuery("SgdTipoTramite.findAll", SgdTipoTramite.class).getResultList();
     }
+    
+    public SgdTipoTramite getSgdTipoTramiteFindById(Integer id) {
+        return em.createNamedQuery("SgdTipoTramite.findById", SgdTipoTramite.class)
+                 .setParameter("id", id)
+                 .getSingleResult();
+    }
 
     public List<SgdDependencia> getSgdDependenciaFindDependencias() {
         return em.createNamedQuery("SgdDependencia.findDependencias", SgdDependencia.class).getResultList();
