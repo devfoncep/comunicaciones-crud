@@ -397,14 +397,14 @@ public class ParametrosService {
         //F -> Fisica, E -> Electronica
         if("F".equals(tipoCom)){
             tiposCanal.clear();
-            tiposCanal.add(new SelectItem("MENSAJERIA", "Empresa Mensajeria"));
-            tiposCanal.add(new SelectItem("PRESENCIAL", "Presencial"));
+            tiposCanal.add(new SelectItem(1, "Empresa Mensajeria"));
+            tiposCanal.add(new SelectItem(2, "Presencial"));
         }else{
             tiposCanal.clear();
-            tiposCanal.add(new SelectItem("MAIL", "Mail"));
-            tiposCanal.add(new SelectItem("PAGINA", "Pagina Web"));
-            tiposCanal.add(new SelectItem("REDES", "Redes Sociales"));
-            tiposCanal.add(new SelectItem("TELEFONO", "Telefonico"));
+            tiposCanal.add(new SelectItem(3, "Mail"));
+            tiposCanal.add(new SelectItem(4, "Pagina Web"));
+            tiposCanal.add(new SelectItem(5, "Redes Sociales"));
+            tiposCanal.add(new SelectItem(6, "Telefonico"));
         }
         return tiposCanal;
     }

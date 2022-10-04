@@ -24,8 +24,9 @@ import javax.persistence.NamedQuery;
                             query = "select o from Folderfolders o where o.fparentguid = :param")
     })
 public class Folderfolders implements Serializable {
-    @SuppressWarnings("compatibility:1508485305770897797")
-    private static final long serialVersionUID = 1L;
+    
+    private static final long serialVersionUID = 4042681106276940127L;
+
     private BigDecimal fallocatedfoldersize;
     private String fallocatorparentfolderguid;
     @Column(nullable = false, length = 100)
