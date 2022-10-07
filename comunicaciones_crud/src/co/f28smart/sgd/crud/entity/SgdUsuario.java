@@ -22,15 +22,16 @@ import javax.persistence.TemporalType;
                 @NamedQuery(name = "SgdUsuario.findByDependencia", 
                             query = "select o from SgdUsuario o where o.codigoDependencia = :param and o.activo = 1 order by o.nombreUsuario asc"),
                 @NamedQuery(name = "SgdUsuario.findByDependencyApprovers", 
-                            query = "select o from SgdUsuario o, SgdUsuarioRol ur where o.idUsuario = ur.idUsuario and ur.idRol = 2 AND o.codigoDependencia = :param and o.activo = 1 order by o.nombreUsuario asc")
+                            query = "select o from SgdUsuario o, SgdRolUsuarioDep ur where o.idUsuario = ur.idUsuario and ur.idRol = 2 AND ur.codigoDependencia = :param AND o.activo = 1 order by o.nombreUsuario asc")
                 })
 @Table(name = "SGD_USUARIO")
+@SuppressWarnings("oracle.jdeveloper.ejb.entity-class-auto-id-gen")
 public class SgdUsuario implements Serializable {
-    @SuppressWarnings("compatibility:1533893351252685282")
+    @SuppressWarnings("compatibility:-81295835425403243")
     private static final long serialVersionUID = 1L;
 
     @Column(name = "CODIGO_DEPENDENCIA")
-    private Long codigoDependencia;
+    private Integer codigoDependencia;
     @Column(length = 100)
     private String email;
     @Temporal(TemporalType.DATE)
@@ -54,7 +55,7 @@ public class SgdUsuario implements Serializable {
     public SgdUsuario() {
     }
 
-    public SgdUsuario(Long codigoDependencia, String email, Date fechaActualizacion, Date fechaCreacion,
+    public SgdUsuario(Integer codigoDependencia, String email, Date fechaActualizacion, Date fechaCreacion,
                       String idUsuario, String nombreUsuario, String usuarioActualizacion, String usuarioCreacion) {
         this.codigoDependencia = codigoDependencia;
         this.email = email;
@@ -66,11 +67,11 @@ public class SgdUsuario implements Serializable {
         this.usuarioCreacion = usuarioCreacion;
     }
 
-    public Long getCodigoDependencia() {
+    public Integer getCodigoDependencia() {
         return codigoDependencia;
     }
 
-    public void setCodigoDependencia(Long codigoDependencia) {
+    public void setCodigoDependencia(Integer codigoDependencia) {
         this.codigoDependencia = codigoDependencia;
     }
 

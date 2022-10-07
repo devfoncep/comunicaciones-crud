@@ -5,42 +5,44 @@
     <persistence-unit name="comunicacionesPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/ComunicacionesDS</jta-data-source>
-        <class>co.f28smart.sgd.crud.entity.SgdEntidad</class>
-        <class>co.f28smart.sgd.crud.entity.SgdRemitente</class>
-        <class>co.f28smart.sgd.crud.entity.SgdOcupacion</class>
-        <class>co.f28smart.sgd.crud.entity.SgdEtnia</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoTitulo</class>
-        <class>co.f28smart.sgd.crud.entity.SgdMunicipio</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoSolicitud</class>
-        <class>co.f28smart.sgd.crud.entity.SgdUsuarioNew</class>
         <class>co.f28smart.sgd.crud.entity.SgdUsuario</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoTramite</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoIdentificacion</class>
-        <class>co.f28smart.sgd.crud.entity.SgdPoblacionVulnerable</class>
-        <class>co.f28smart.sgd.crud.entity.SgdReasignacionComAudit</class>
-        <class>co.f28smart.sgd.crud.entity.SgdRangoEdad</class>
-        <class>co.f28smart.sgd.crud.entity.SgdDependencia</class>
-        <class>co.f28smart.sgd.crud.entity.SgdComunicacion</class>
-        <class>co.f28smart.sgd.crud.entity.SgdPais</class>
-        <class>co.f28smart.sgd.crud.entity.SgdFestivo</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoComInterna</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoEmpresa</class>
         <class>co.f28smart.sgd.crud.entity.SgdInteresado</class>
-        <class>co.f28smart.sgd.crud.entity.SgdRol</class>
-        <class>co.f28smart.sgd.crud.entity.SgdPlantilla</class>
-        <class>co.f28smart.sgd.crud.entity.Folderfiles</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoEnvio</class>
-        <class>co.f28smart.sgd.crud.entity.SgdComunicacionesView</class>
-        <class>co.f28smart.sgd.crud.entity.Folderfolders</class>
-        <class>co.f28smart.sgd.crud.entity.SgdCategoriaTipo</class>
-        <class>co.f28smart.sgd.crud.entity.SgdAnexoComunicacion</class>
-        <class>co.f28smart.sgd.crud.entity.SgdComunicacionPrqsAud</class>
+        <class>co.f28smart.sgd.crud.entity.SgdRemitente</class>
         <class>co.f28smart.sgd.crud.entity.SgdAccionRespuesta</class>
-        <class>co.f28smart.sgd.crud.entity.SgdDepartamento</class>
-        <class>co.f28smart.sgd.crud.entity.SgdUsuarioRol</class>
-        <class>co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico</class>
+        <class>co.f28smart.sgd.crud.entity.SgdPais</class>
         <class>co.f28smart.sgd.crud.entity.SgdParentesco</class>
+        <class>co.f28smart.sgd.crud.entity.SgdUsuarioRol</class>
+        <class>co.f28smart.sgd.crud.entity.SgdComunicacionPrqsAud</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoComInterna</class>
+        <class>co.f28smart.sgd.crud.entity.SgdReasignacionComAudit</class>
+        <class>co.f28smart.sgd.crud.entity.SgdDependencia</class>
+        <class>co.f28smart.sgd.crud.entity.SgdEntidad</class>
+        <class>co.f28smart.sgd.crud.entity.SgdRol</class>
+        <class>co.f28smart.sgd.crud.entity.SgdComunicacionesView</class>
+        <class>co.f28smart.sgd.crud.entity.SgdRangoEdad</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoIdentificacion</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoTramite</class>
+        <class>co.f28smart.sgd.crud.entity.SgdCategoriaTipo</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoEnvio</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoEmpresa</class>
         <class>co.f28smart.sgd.crud.entity.SgdGruposValor</class>
+        <class>co.f28smart.sgd.crud.entity.SgdRolUsuarioDep</class>
+        <class>co.f28smart.sgd.crud.entity.Folderfolders</class>
+        <class>co.f28smart.sgd.crud.entity.SgdDepartamento</class>
+        <class>co.f28smart.sgd.crud.entity.Requisito</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoSolicitud</class>
+        <class>co.f28smart.sgd.crud.entity.Folderfiles</class>
+        <class>co.f28smart.sgd.crud.entity.SgdUsuarioNew</class>
+        <class>co.f28smart.sgd.crud.entity.SgdMunicipio</class>
+        <class>co.f28smart.sgd.crud.entity.SgdOcupacion</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoTitulo</class>
+        <class>co.f28smart.sgd.crud.entity.SgdComunicacion</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico</class>
+        <class>co.f28smart.sgd.crud.entity.SgdFestivo</class>
+        <class>co.f28smart.sgd.crud.entity.SgdPoblacionVulnerable</class>
+        <class>co.f28smart.sgd.crud.entity.SgdAnexoComunicacion</class>
+        <class>co.f28smart.sgd.crud.entity.SgdPlantilla</class>
+        <class>co.f28smart.sgd.crud.entity.SgdEtnia</class>
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="jdbc/ComunicacionesDS"/>

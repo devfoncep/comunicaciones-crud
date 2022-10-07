@@ -25,12 +25,12 @@ import javax.persistence.TemporalType;
                 })
 @Table(name = "SGD_DEPENDENCIA")
 public class SgdDependencia implements Serializable {
-    @SuppressWarnings("compatibility:-3968501279788307754")
+    @SuppressWarnings("compatibility:3103887272074231263")
     private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "CODIGO_DEPENDENCIA", nullable = false, length = 100)
-    private String codigoDependencia;
+    private Integer codigoDependencia;
     @Column(nullable = false, length = 200)
     private String dependencia;
     @Temporal(TemporalType.DATE)
@@ -55,7 +55,7 @@ public class SgdDependencia implements Serializable {
     public SgdDependencia() {
     }
 
-    public SgdDependencia(String codigoDependencia, String dependencia, Date fechaCreacion, Date fechaModificacion,
+    public SgdDependencia(Integer codigoDependencia, String dependencia, Date fechaCreacion, Date fechaModificacion,
                            BigDecimal idSubCategoria, String ipCreacion, String ipModificacion, String subcategoria,
                            String usuarioCreacion, String usuarioModificacion, String vicepresidencia,
                            BigDecimal vigente) {
@@ -70,11 +70,11 @@ public class SgdDependencia implements Serializable {
         this.vigente = vigente;
     }
 
-    public String getCodigoDependencia() {
+    public Integer getCodigoDependencia() {
         return codigoDependencia;
     }
 
-    public void setCodigoDependencia(String codigoDependencia) {
+    public void setCodigoDependencia(Integer codigoDependencia) {
         this.codigoDependencia = codigoDependencia;
     }
 
