@@ -234,7 +234,7 @@ public class ComunicacionesServiceFacade {
         commitTransaction();
     }
 
-    public List<SgdMunicipio> getSgdMunicipioFindByDepto(final Integer idDepto) {
+    public List<SgdMunicipio> getSgdMunicipioFindByDepto(Integer idDepto) {
         return em.createNamedQuery("SgdMunicipio.findByDepto", SgdMunicipio.class)
                  .setParameter("param", idDepto)
                  .getResultList();
@@ -393,13 +393,13 @@ public class ComunicacionesServiceFacade {
                  .getSingleResult();
     }
 
-    public List<SgdUsuario> getSgdUsuarioFindByDependencia(final Long idDependencia) {
+    public List<SgdUsuario> getSgdUsuarioFindByDependencia(Integer idDependencia) {
         return em.createNamedQuery("SgdUsuario.findByDependencia", SgdUsuario.class)
                  .setParameter("param", idDependencia)
                  .getResultList();
     }
 
-    public List<SgdUsuario> getSgdUsuarioFindByApprovers(final Long idDependencia) {
+    public List<SgdUsuario> getSgdUsuarioFindByApprovers(Integer idDependencia) {
         return em.createNamedQuery("SgdUsuario.findByDependencyApprovers", SgdUsuario.class)
                  .setParameter("param", idDependencia)
                  .getResultList();
@@ -659,7 +659,7 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdDependencia.findDependencias", SgdDependencia.class).getResultList();
     }
 
-    public SgdDependencia getSgdDependenciaFindByID(String id) {
+    public SgdDependencia getSgdDependenciaFindByID(Integer id) {
         return em.createNamedQuery("SgdDependencia.findById", SgdDependencia.class)
                  .setParameter("param", id)
                  .getSingleResult();
