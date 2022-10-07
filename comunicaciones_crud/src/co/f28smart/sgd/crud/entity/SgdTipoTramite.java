@@ -19,8 +19,9 @@ import javax.persistence.Table;
                             query = "select o from SgdTipoTramite o where o.idTipoTramite = :id")})
 @Table(name = "SGD_TIPO_TRAMITE")
 public class SgdTipoTramite implements Serializable {
-    private static final long serialVersionUID = -4198957649026223178L;
-
+    @SuppressWarnings("compatibility:7570316146848990074")
+    private static final long serialVersionUID = -1341718912957311109L;
+    
     @Id
     @Column(name = "ID_TIPO_TRAMITE", nullable = false)
     private Integer idTipoTramite;

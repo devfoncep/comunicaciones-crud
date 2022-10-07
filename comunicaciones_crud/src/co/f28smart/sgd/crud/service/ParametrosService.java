@@ -58,9 +58,6 @@ public class ParametrosService {
     private List<SelectItem> gruposValor = new ArrayList<>();
     private List<Requisito> requisitosTramite = new ArrayList<>();
     private List<SelectItem> tiposCanal = new ArrayList<>();
-    private List<SelectItem> lstLocalidad = new ArrayList<>();
-    private List<SelectItem> lstUpz = new ArrayList<>();
-    private List<SelectItem> lstBarrio = new ArrayList<>();
 
 
     final ComunicacionesServiceFacade comunicacionesService;
@@ -410,33 +407,6 @@ public class ParametrosService {
             tiposCanal.add(new SelectItem(6, "Telefonico"));
         }
         return tiposCanal;
-    }
-    
-    public List<SelectItem> getLocalidades(){
-        
-        lstLocalidad.add(new SelectItem(1, "Localidad 1"));
-        lstLocalidad.add(new SelectItem(2, "Localidad 2"));
-        lstLocalidad.add(new SelectItem(3, "Localidad 3"));
-       
-        return lstLocalidad;
-    }
-    
-    public List<SelectItem> getUPZs(){
-        
-        lstUpz.add(new SelectItem(1, "UPZ 1"));
-        lstUpz.add(new SelectItem(2, "UPZ 2"));
-        lstUpz.add(new SelectItem(3, "UPZ 3"));
-       
-        return lstUpz;
-    }
-    
-    public List<SelectItem> getBarrios(){
-        
-        lstBarrio.add(new SelectItem(1, "Barrio 1"));
-        lstBarrio.add(new SelectItem(2, "Barrio 2"));
-        lstBarrio.add(new SelectItem(3, "Barrio 3"));
-       
-        return lstBarrio;
     }
     
     private void loadGruposValor() {
