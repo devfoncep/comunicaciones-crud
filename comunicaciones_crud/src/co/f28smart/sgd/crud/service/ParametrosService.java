@@ -2,30 +2,24 @@ package co.f28smart.sgd.crud.service;
 
 
 import co.f28smart.sgd.crud.entity.Folderfolders;
+import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
-import co.f28smart.sgd.crud.entity.SgdPoblacionVulnerable;
-import co.f28smart.sgd.crud.entity.SgdRemitente;
+import co.f28smart.sgd.crud.entity.SgdPais;
 import co.f28smart.sgd.crud.entity.SgdTipoTramite;
 import co.f28smart.sgd.crud.facade.ComunicacionesServiceFacade;
-
 import co.f28smart.sgd.crud.facade.WebCCServiceFacade;
-
-import com.oracle.wls.shaded.org.apache.bcel.generic.Select;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import java.util.Properties;
 import java.util.stream.Collectors;
-
 import javax.faces.model.SelectItem;
-
 import org.apache.log4j.Logger;
+
 
 public class ParametrosService {
     private Logger logger;
@@ -52,8 +46,14 @@ public class ParametrosService {
     private List<SelectItem> rangoEdades = new ArrayList<>();
     private List<SelectItem> entidades = new ArrayList<>();
     private List<SelectItem> tiposDocumentales = new ArrayList<>();
-
-
+    private List<SelectItem> parentescos = new ArrayList<>();
+    private List<SelectItem> gruposValor = new ArrayList<>();
+    private List<Requisito> requisitosTramite = new ArrayList<>();
+    private List<SelectItem> tiposCanal = new ArrayList<>();
+    private List<SelectItem> lstLocalidad = new ArrayList<>();
+    private List<SelectItem> lstUpz = new ArrayList<>();
+    private List<SelectItem> lstBarrio = new ArrayList<>();
+    private List<SelectItem> lstIdioma = new ArrayList<>();
 
     final ComunicacionesServiceFacade comunicacionesService;
     final WebCCServiceFacade webCCServiceFacade = new WebCCServiceFacade();
@@ -63,6 +63,7 @@ public class ParametrosService {
         super();
         logger = Logger.getLogger(this.getClass().getSimpleName());
         logger.debug("# " + this.getClass().getSimpleName());
+        comunicacionesService = new ComunicacionesServiceFacade();
         
         Properties ridcProperties = new Properties();
         String ruta = System.getProperty("user.dir") + "/config/SGD/"+ridcPropertiesFileName;
@@ -75,12 +76,8 @@ public class ParametrosService {
         } catch (IOException e) {
             logger.error("Error al leer el archivo "+ruta,e);
         }
+    
         Object o = ridcProperties.get("ROOTFFOLDERGUID");
-
-        comunicacionesService = new ComunicacionesServiceFacade();
-
-        loadTipoTramites();
-        loadTipoEnvios();
         if(o!= null){
             logger.debug("ROOTFFOLDERGUID :"+o);
             loadCategorias(o.toString());
@@ -88,6 +85,8 @@ public class ParametrosService {
             loadCategorias(ROOTFFOLDERGUID);
         }
 
+        loadTipoTramites();
+        loadTipoEnvios();
         loadDependencias();
         loadTipoAnexosFisicos();
         loadAccionesRespuesta();
@@ -100,7 +99,10 @@ public class ParametrosService {
         loadEtnias();
         loadRangoEdades();
         loadTiposDocumentales();
-
+        loadGruposValor();
+        loadParentescos();
+        loadRequisitosTramite();
+        loadIdiomas();
     }
     
     private void loadTiposDocumentales() {
@@ -113,7 +115,7 @@ public class ParametrosService {
     
 
     private void loadEntidades() {
-        this.rangoEdades = comunicacionesService.getSgdEntidadFindAll()
+        this.entidades = comunicacionesService.getSgdEntidadFindAll()
                                                 .stream()
                                                 .map(p -> new SelectItem(p.getIdEntidad(), p.getNombre()))
                                                 .collect(Collectors.toList());
@@ -139,7 +141,6 @@ public class ParametrosService {
                                                         .stream()
                                                         .map(p -> new SelectItem(p.getIdPoblacionVulnerable(), p.getNombre()))
                                  .collect(Collectors.toList());
-
     }
 
     private void loadTipoEmpresas() {
@@ -147,14 +148,16 @@ public class ParametrosService {
                                                  .stream()
                                                  .map(p -> new SelectItem(p.getIdTipoEmpresa(), p.getNombre()))
                                                  .collect(Collectors.toList());
-
     }
 
     private void loadPaises() {
-        this.paises = comunicacionesService.getSgdPaisFindAll()
+        for(SgdPais pais : comunicacionesService.getSgdPaisFindAll()) {
+            paises.add(new SelectItem(pais.getId(), pais.getNombre()));
+        }
+        /*this.paises = comunicacionesService.getSgdPaisFindAll()
                                            .stream()
                                            .map(p -> new SelectItem(p.getId(), p.getNombre()))
-                                           .collect(Collectors.toList());
+                                           .collect(Collectors.toList());*/
     }
 
     private void loadTipoTramites() {
@@ -169,6 +172,15 @@ public class ParametrosService {
             this.tipoTramites.add(new SelectItem(1, "Memorando Circular"));
             this.tipoTramites.add(new SelectItem(2, "Circular Interna"));
 
+        }
+    }
+    
+    public SgdTipoTramite getTipoTramiteById(Integer id){
+        try {
+           return comunicacionesService.getSgdTipoTramiteFindById(id);
+        } catch (Exception e) {
+            logger.error("ParametrosService getTipoTramiteById Exception", e);
+            return null;
         }
     }
 
@@ -187,6 +199,18 @@ public class ParametrosService {
         }
     }
 
+    public void loadIdiomas() {
+        try {
+            this.lstIdioma = comunicacionesService.getSgdIdiomaComFindAll()
+                                                   .stream()
+                                                   .map(p -> new SelectItem(p.getIdIdiomaCom(), p.getNombre()))
+                                                   .collect(Collectors.toList());
+        } catch (Exception e) {
+            logger.error("loadIdiomas -> Error al obtener los tipos de envío de la BD", e);
+            this.lstIdioma.add(new SelectItem(2, "Otro"));
+        }
+    }
+    
     private void loadTipoEnvios() {
         try {
             this.tipoEnvios = comunicacionesService.getSgdTipoEnvioFindAll()
@@ -202,45 +226,53 @@ public class ParametrosService {
     }
 
     private void loadCategorias(String guid) {
-        this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(guid)) {
+            categorias.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
                                             .stream()
                                             .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                            .collect(Collectors.toList());
+                                            .collect(Collectors.toList());*/
     }
 
     private void loadProcesos(String fParentGUID) {
-
-        this.procesos = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            procesos.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.procesos = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                           .stream()
                                           .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                          .collect(Collectors.toList());
-
-
+                                          .collect(Collectors.toList());*/
     }
 
     private void loadSeries(String fParentGUID) {
-        this.series = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            series.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.series = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                         .stream()
                                         .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                        .collect(Collectors.toList());
-
+                                        .collect(Collectors.toList());*/
     }
 
     private void loadSubseries(String fParentGUID) {
-        this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            subseries.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                            .stream()
                                            .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                           .collect(Collectors.toList());
-
-
+                                           .collect(Collectors.toList());*/
     }
 
     private void loadExpedientes(String fParentGUID) {
-        this.expedientes = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            expedientes.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.expedientes = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
                                              .stream()
                                              .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
-                                             .collect(Collectors.toList());
-
+                                             .collect(Collectors.toList());*/
     }
 
     private void loadTipoIdentificacion() {
@@ -284,18 +316,21 @@ public class ParametrosService {
             this.dependencias.add(new SelectItem("2", "DEPENDENCIA_Test2"));
             this.dependencias.add(new SelectItem("3", "DEPENDENCIA_Test3"));
 
-
         } catch (Exception e) {
             logger.error("Error al recuperar las dependencias de la BD", e);
 
             this.dependencias.add(new SelectItem("1", "DEPENDENCIA_Test1"));
             this.dependencias.add(new SelectItem("2", "DEPENDENCIA_Test2"));
             this.dependencias.add(new SelectItem("3", "DEPENDENCIA_Test3"));
-
         }
-
-
     }
+    
+    private void loadRequisitosTramite() {
+        requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
+        requisitosTramite.add(new Requisito(1, "4333.2 - Copia del documento de identidad del solicitante por ambos lados", false));
+        requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
+    }
+
 
     private void loadTipoAnexosFisicos() {
         try {
@@ -358,8 +393,93 @@ public class ParametrosService {
                                         .map(p -> new SelectItem(p.getIdUsuario(), p.getNombreUsuario()))
                                         .collect(Collectors.toList());
         return usuarios;
-
     }
+    
+    public List<SelectItem> getTipoCanalesByTipoCom(String tipoCom){
+        //F -> Fisica, E -> Electronica
+        if("F".equals(tipoCom)){
+            tiposCanal.clear();
+            tiposCanal.add(new SelectItem(1, "Empresa Mensajeria"));
+            tiposCanal.add(new SelectItem(2, "Presencial"));
+        }else{
+            tiposCanal.clear();
+            tiposCanal.add(new SelectItem(3, "Mail"));
+            tiposCanal.add(new SelectItem(4, "Pagina Web"));
+            tiposCanal.add(new SelectItem(5, "Redes Sociales"));
+            tiposCanal.add(new SelectItem(6, "Telefonico"));
+        }
+        return tiposCanal;
+    }
+    
+    public List<SelectItem> getLocalidades(){
+        
+        lstLocalidad.add(new SelectItem(1, "Localidad 1"));
+        lstLocalidad.add(new SelectItem(2, "Localidad 2"));
+        lstLocalidad.add(new SelectItem(3, "Localidad 3"));
+       
+        return lstLocalidad;
+    }
+    
+    public List<SelectItem> getUPZs(){
+        
+        lstUpz.add(new SelectItem(1, "UPZ 1"));
+        lstUpz.add(new SelectItem(2, "UPZ 2"));
+        lstUpz.add(new SelectItem(3, "UPZ 3"));
+       
+        return lstUpz;
+    }
+    
+    public List<SelectItem> getBarrios(){
+        
+        lstBarrio.add(new SelectItem(1, "Barrio 1"));
+        lstBarrio.add(new SelectItem(2, "Barrio 2"));
+        lstBarrio.add(new SelectItem(3, "Barrio 3"));
+       
+        return lstBarrio;
+    }
+
+    
+    private void loadGruposValor() {
+        this.gruposValor = comunicacionesService.getSgdGruposValorFindAll().stream()
+                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                       .collect(Collectors.toList());
+    }
+
+    private void loadParentescos() {
+        this.parentescos = comunicacionesService.getSgdParentescoFindAll().stream()
+                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                       .collect(Collectors.toList());
+    }
+    
+    public List<SgdEntidad> getEntidadesByNitName(Integer nit, String name) {
+        
+        return comunicacionesService.getSgdEntidadFindByNameNit(nit, name);
+    }
+
+    public void setParentescos(List<SelectItem> parentescos) {
+        this.parentescos = parentescos;
+    }
+
+    public List<SelectItem> getParentescos() {
+        return parentescos;
+    }
+
+    public void setGruposValor(List<SelectItem> gruposValor) {
+        this.gruposValor = gruposValor;
+    }
+
+    public List<SelectItem> getGruposValor() {
+        return gruposValor;
+    }
+
+    public void setRequisitosTramite(List<Requisito> requisitosTramite) {
+        this.requisitosTramite = requisitosTramite;
+    }
+
+    public List<Requisito> getRequisitosTramite() {
+        return requisitosTramite;
+    }
+
 
     public List<SelectItem> getTipoTramites() {
         return tipoTramites;
@@ -473,6 +593,10 @@ public class ParametrosService {
         } else {
             return "";
         }
+    }
+
+    public List<SelectItem> getLstIdioma() {
+        return lstIdioma;
     }
 }
 

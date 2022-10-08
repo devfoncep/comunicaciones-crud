@@ -22,6 +22,7 @@ import co.f28smart.sgd.crud.entity.SgdRemitente;
 import co.f28smart.sgd.crud.entity.SgdRol;
 import co.f28smart.sgd.crud.entity.SgdDependencia;
 import co.f28smart.sgd.crud.entity.SgdGruposValor;
+import co.f28smart.sgd.crud.entity.SgdIdiomaCom;
 import co.f28smart.sgd.crud.entity.SgdParentesco;
 import co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico;
 import co.f28smart.sgd.crud.entity.SgdTipoComInterna;
@@ -675,5 +676,9 @@ public class ComunicacionesServiceFacade {
 
     public List<SgdParentesco> getSgdParentescoFindAll() {
         return em.createNamedQuery("SgdParentesco.findAll", SgdParentesco.class).getResultList();
+    }
+    
+    public List<SgdIdiomaCom> getSgdIdiomaComFindAll() {
+        return em.createNamedQuery("SgdIdiomaCom.findAll", SgdIdiomaCom.class).getResultList();
     }
 }
