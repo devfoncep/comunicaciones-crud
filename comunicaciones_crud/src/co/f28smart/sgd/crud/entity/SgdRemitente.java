@@ -1,16 +1,10 @@
 package co.f28smart.sgd.crud.entity;
 
 import java.io.Serializable;
-
-import java.math.BigDecimal;
-
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -43,24 +37,24 @@ public class SgdRemitente implements Serializable {
     @Column(name = "FECHA_CREACION")
     private Date fechaCreacion;
     @Column(name = "ID_DEPARTAMENTO")
-    private BigDecimal idDepartamento;
+    private Long idDepartamento;
     @Column(name = "ID_ETNIA")
-    private BigDecimal idEtnia;
+    private Long idEtnia;
     @Column(name = "ID_MUNICIPIO")
-    private BigDecimal idMunicipio;
+    private Long idMunicipio;
     @Column(name = "ID_PAIS", nullable = false)
-    private BigDecimal idPais;
+    private Long idPais;
     @Column(name = "ID_POBLACION_VULNERABLE")
-    private BigDecimal idPoblacionVulnerable;
+    private Long idPoblacionVulnerable;
     @Column(name = "ID_RANGO_EDAD")
-    private BigDecimal idRangoEdad;
+    private Long idRangoEdad;
     @Column(name = "ID_TIPO_IDENTIFICACION", nullable = false)
     private Integer idTipoIdentificacion;
     @Column(name = "NOMBRE_COMPLETO", nullable = false, length = 50)
     private String nombreCompleto;
     @Id
     @Column(name = "NO_IDENTIFICACION", nullable = false)
-    private BigDecimal noIdentificacion;
+    private Long noIdentificacion;
     @Column(length = 20)
     private String telefono;
     @Column(length = 20)
@@ -70,15 +64,15 @@ public class SgdRemitente implements Serializable {
     @Column(name = "USUARIO_CREACION", length = 20)
     private String usuarioCreacion;
     @Column(name = "NIT_ENTIDAD")
-    private BigDecimal nitEntidad;
+    private Long nitEntidad;
 
     public SgdRemitente() {
     }
 
     public SgdRemitente(String cargo, String celular, String direccion, String email, Date fechaActualizacion,
-                        Date fechaCreacion, BigDecimal idDepartamento, BigDecimal idEtnia, BigDecimal idMunicipio,
-                        BigDecimal idPais, BigDecimal idPoblacionVulnerable, BigDecimal idRangoEdad,
-                        Integer idTipoIdentificacion, BigDecimal nitEntidad, BigDecimal noIdentificacion,
+                        Date fechaCreacion, Long idDepartamento, Long idEtnia, Long idMunicipio,
+                        Long idPais, Long idPoblacionVulnerable, Long idRangoEdad,
+                        Integer idTipoIdentificacion, Long nitEntidad, Long noIdentificacion,
                         String nombreCompleto, String telefono, String titulo, String usuarioActualizacion,
                         String usuarioCreacion) {
         this.cargo = cargo;
@@ -152,51 +146,51 @@ public class SgdRemitente implements Serializable {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public BigDecimal getIdDepartamento() {
+    public Long getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(BigDecimal idDepartamento) {
+    public void setIdDepartamento(Long idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 
-    public BigDecimal getIdEtnia() {
+    public Long getIdEtnia() {
         return idEtnia;
     }
 
-    public void setIdEtnia(BigDecimal idEtnia) {
+    public void setIdEtnia(Long idEtnia) {
         this.idEtnia = idEtnia;
     }
 
-    public BigDecimal getIdMunicipio() {
+    public Long getIdMunicipio() {
         return idMunicipio;
     }
 
-    public void setIdMunicipio(BigDecimal idMunicipio) {
+    public void setIdMunicipio(Long idMunicipio) {
         this.idMunicipio = idMunicipio;
     }
 
-    public BigDecimal getIdPais() {
+    public Long getIdPais() {
         return idPais;
     }
 
-    public void setIdPais(BigDecimal idPais) {
+    public void setIdPais(Long idPais) {
         this.idPais = idPais;
     }
 
-    public BigDecimal getIdPoblacionVulnerable() {
+    public Long getIdPoblacionVulnerable() {
         return idPoblacionVulnerable;
     }
 
-    public void setIdPoblacionVulnerable(BigDecimal idPoblacionVulnerable) {
+    public void setIdPoblacionVulnerable(Long idPoblacionVulnerable) {
         this.idPoblacionVulnerable = idPoblacionVulnerable;
     }
 
-    public BigDecimal getIdRangoEdad() {
+    public Long getIdRangoEdad() {
         return idRangoEdad;
     }
 
-    public void setIdRangoEdad(BigDecimal idRangoEdad) {
+    public void setIdRangoEdad(Long idRangoEdad) {
         this.idRangoEdad = idRangoEdad;
     }
 
@@ -217,11 +211,11 @@ public class SgdRemitente implements Serializable {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public BigDecimal getNoIdentificacion() {
+    public Long getNoIdentificacion() {
         return noIdentificacion;
     }
 
-    public void setNoIdentificacion(BigDecimal noIdentificacion) {
+    public void setNoIdentificacion(Long noIdentificacion) {
         this.noIdentificacion = noIdentificacion;
     }
 
@@ -258,11 +252,11 @@ public class SgdRemitente implements Serializable {
     }
 
 
-    public void setNitEntidad(BigDecimal nitEntidad) {
+    public void setNitEntidad(Long nitEntidad) {
         this.nitEntidad = nitEntidad;
     }
 
-    public BigDecimal getNitEntidad() {
+    public Long getNitEntidad() {
         return nitEntidad;
     }
 

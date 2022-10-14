@@ -635,7 +635,7 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdEntidad.findAll", SgdRemitente.class).getResultList();
     }
 
-    public List<SgdRemitente> getSgdRemitenteFindByIdNombre(Integer id, String nombre) {
+    public List<SgdRemitente> getSgdRemitenteFindByIdNombre(Long id, String nombre) {
         String parsedString = "";
         if (nombre != null && !nombre.isEmpty()) {
             parsedString = "%" + nombre.toLowerCase().replace(' ', '%') + "%";

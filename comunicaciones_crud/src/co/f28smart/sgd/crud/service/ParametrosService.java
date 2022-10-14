@@ -5,6 +5,7 @@ import co.f28smart.sgd.crud.entity.Folderfolders;
 import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
 import co.f28smart.sgd.crud.entity.SgdPais;
+import co.f28smart.sgd.crud.entity.SgdRemitente;
 import co.f28smart.sgd.crud.entity.SgdTipoTramite;
 import co.f28smart.sgd.crud.facade.ComunicacionesServiceFacade;
 import co.f28smart.sgd.crud.facade.WebCCServiceFacade;
@@ -455,6 +456,12 @@ public class ParametrosService {
         
         return comunicacionesService.getSgdEntidadFindByNameNit(nit, name);
     }
+    
+    public List<SgdRemitente> getRemitentesByIdName(Long id, String name) {
+        
+        return comunicacionesService.getSgdRemitenteFindByIdNombre(id, name);
+    }
+    
 
     public void setParentescos(List<SelectItem> parentescos) {
         this.parentescos = parentescos;
