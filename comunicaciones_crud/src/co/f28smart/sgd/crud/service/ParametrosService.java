@@ -227,6 +227,7 @@ public class ParametrosService {
     }
 
     private void loadCategorias(String guid) {
+        categorias = new ArrayList<SelectItem>();
         for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(guid)) {
             categorias.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
@@ -237,6 +238,7 @@ public class ParametrosService {
     }
 
     private void loadProcesos(String fParentGUID) {
+        procesos = new ArrayList<SelectItem>();
         for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             procesos.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
@@ -247,6 +249,7 @@ public class ParametrosService {
     }
 
     private void loadSeries(String fParentGUID) {
+        series  = new ArrayList<SelectItem>();
         for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             series.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
@@ -257,6 +260,7 @@ public class ParametrosService {
     }
 
     private void loadSubseries(String fParentGUID) {
+        subseries =  new ArrayList<SelectItem>();
         for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             subseries.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
@@ -267,6 +271,7 @@ public class ParametrosService {
     }
 
     private void loadExpedientes(String fParentGUID) {
+        expedientes  = new ArrayList<SelectItem>();
         for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             expedientes.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
