@@ -3,17 +3,26 @@ package co.f28smart.sgd.crud.facade;
 import co.f28smart.sgd.crud.entity.Folderfiles;
 import co.f28smart.sgd.crud.entity.Folderfolders;
 
+import co.f28smart.sgd.crud.entity.FoncepTbTipodocumental;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.faces.model.SelectItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
+import org.apache.log4j.Logger;
+
 public class WebCCServiceFacade {
+    private Logger logger;
     private final EntityManager em;
 
     public WebCCServiceFacade() {
+        logger = Logger.getLogger(this.getClass().getSimpleName());
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("webccPU");
         em = emf.createEntityManager();
     }
@@ -67,19 +76,91 @@ public class WebCCServiceFacade {
         em.remove(folderfolders);
         commitTransaction();
     }
-    
+
     public List<Folderfolders> getFolderfoldersFindAll() {
         return em.createNamedQuery("Folderfolders.findAll", Folderfolders.class).getResultList();
         //return em.createNativeQuery("select o from Folderfolders o", Folderfolders.class).getResultList();
     }
-    
+
     public Folderfolders getFolderfoldersFindRoot() {
-        List<Folderfolders> lstFolders = em.createNamedQuery("Folderfolders.findRoot", Folderfolders.class).getResultList();
+        List<Folderfolders> lstFolders =
+            em.createNamedQuery("Folderfolders.findRoot", Folderfolders.class).getResultList();
         return lstFolders.isEmpty() ? null : lstFolders.get(0);
     }
-    
+
     public List<Folderfolders> getFolderfoldersFindByParent(final String parentGuid) {
         return em.createNamedQuery("Folderfolders.findByParent", Folderfolders.class)
-                 .setParameter("param", parentGuid).getResultList();
+                 .setParameter("param", parentGuid)
+                 .getResultList();
+    }
+
+    public Integer getIdFondoDocumental(Integer codigo) {
+        try {
+            return em.createNamedQuery("FoncepTbFondodocumental.findIdByCode", Integer.class)
+                     .setParameter("param", codigo)
+                     .getSingleResult();
+        } catch (Exception e) {
+            logger.error("Error al obtener el IdFondoDocumental por el codigo :"+codigo, e);
+            return null;
+        }
+    }
+
+    public Integer getIdSerieDocumental(Integer codigo, Integer idUnidadProductora) {
+        try {
+            return em.createNamedQuery("FoncepTbSeriedocumental.findIdByCodeAndIdUnidadProductora", Integer.class)
+                     .setParameter("param", codigo)
+                     .setParameter("param1", idUnidadProductora)
+                     .getSingleResult();
+        } catch (Exception e) {
+            logger.error("Error al obtener el IdSerieDocumental por el codigo :"+codigo+" y  el idUnidadProductora :"+idUnidadProductora, e);
+            return null;
+        }
+    }
+
+    public Integer getIdSubSerieDocumental(Integer codigo, Integer idSerieDocumental) {
+        try {
+            return em.createNamedQuery("FoncepTbSubserie.findIdByCodeAndIdSerieDocumental", Integer.class)
+                     .setParameter("param", codigo)
+                     .setParameter("param1", idSerieDocumental)
+                     .getSingleResult();
+        } catch (Exception e) {
+            logger.error("Error al obtener el IdSubSerieDocumental por el codigo :" + codigo +
+                         " y el idSerieDocumental :" + idSerieDocumental, e);
+            return null;
+        }
+    }
+
+    public Integer getIdTipoDocumental(Integer codigo) {
+        try {
+            return em.createNamedQuery("FoncepTbTipodocumental.findIdByCode", Integer.class)
+                     .setParameter("param", codigo)
+                     .getSingleResult();
+        } catch (Exception e) {
+            logger.error("Error al obtener el IdTipoDocumental por el codigo :" + codigo, e);
+            return null;
+        }
+    }
+
+    public Integer getIdUnidadProductora(Integer codigo) {
+        try {
+            return em.createNamedQuery("FoncepTbUnidadproductora.findIdByCode", Integer.class)
+                     .setParameter("param", codigo)
+                     .getSingleResult();
+        } catch (Exception e) {
+            logger.error("Error al obtener el IdUnidadProductora por el codigo :" + codigo, e);
+            return null;
+        }
+    }
+
+    public List<FoncepTbTipodocumental> getTiposDocumentalesBySubSerie(Integer idSubSerieDocumental) {
+        try {
+            return em.createNamedQuery("FoncepTbTipodocumental.findBySubSerieDocumental", FoncepTbTipodocumental.class)
+                     .setParameter("param", idSubSerieDocumental)
+                     .getResultList();
+        } catch (Exception e) {
+            
+            logger.error("Error al obtener TiposDocumentales por la SubSerie :" + idSubSerieDocumental, e);
+            return new ArrayList<FoncepTbTipodocumental>();
+        }
     }
 }

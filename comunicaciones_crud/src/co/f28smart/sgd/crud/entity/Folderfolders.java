@@ -15,17 +15,17 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "Folderfolders.findAll", query = "select o from Folderfolders o"),
+@NamedQueries({ @NamedQuery(name = "Folderfolders.findAll", query = "select o from Folderfolders o  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findRoot",
-                            query = "select o from Folderfolders o where o.fparentguid = 'FLD_ENTERPRISE_LIBRARY'"),
+                            query = "select o from Folderfolders o where o.fparentguid = 'FLD_ENTERPRISE_LIBRARY'  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findRootByFolderGUID",
-                            query = "select o from Folderfolders o where o.ffolderguid = :param"),
+                            query = "select o from Folderfolders o where o.ffolderguid = :param  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findByParent",
-                            query = "select o from Folderfolders o where o.fparentguid = :param")
+                            query = "select o from Folderfolders o where o.fparentguid = :param order by o.ffoldername asc")
     })
 public class Folderfolders implements Serializable {
-    
-    private static final long serialVersionUID = 4042681106276940127L;
+    @SuppressWarnings("compatibility:1508485305770897797")
+    private static final long serialVersionUID = 1L;
 
     private BigDecimal fallocatedfoldersize;
     private String fallocatorparentfolderguid;

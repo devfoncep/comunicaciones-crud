@@ -77,7 +77,7 @@
    </list>
    <value n="defaultPackage" v="co.gov.ica"/>
    <hash n="ejbModuleContainer">
-      <value n="dbConnection" v="ComunicacionesDB"/>
+      <value n="dbConnection" v="wcc-cs-ds"/>
       <value n="ejbMetaDataPrefs" v="PREFASANNON"/>
       <value n="ejbVersion" v="3.0"/>
       <list n="serviceFacadeUrls">
@@ -402,6 +402,9 @@
             </hash>
             <hash n="wccPU">
                <value n="development-database" v="WccDB"/>
+            </hash>
+            <hash n="webccPU">
+               <value n="development-database" v="wcc-cs-ds"/>
             </hash>
          </hash>
       </hash>

@@ -14,11 +14,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
+
 import javax.faces.model.SelectItem;
+
 import org.apache.log4j.Logger;
 
 
@@ -65,24 +68,24 @@ public class ParametrosService {
         logger = Logger.getLogger(this.getClass().getSimpleName());
         logger.debug("# " + this.getClass().getSimpleName());
         comunicacionesService = new ComunicacionesServiceFacade();
-        
+
         Properties ridcProperties = new Properties();
-        String ruta = System.getProperty("user.dir") + "/config/SGD/"+ridcPropertiesFileName;
+        String ruta = System.getProperty("user.dir") + "/config/SGD/" + ridcPropertiesFileName;
         InputStream input = null;
-        try{
+        try {
             input = new FileInputStream(ruta);
             ridcProperties.load(input);
         } catch (FileNotFoundException e) {
-            logger.error("Archivo "+ruta+" no encontrado",e);
+            logger.error("Archivo " + ruta + " no encontrado", e);
         } catch (IOException e) {
-            logger.error("Error al leer el archivo "+ruta,e);
+            logger.error("Error al leer el archivo " + ruta, e);
         }
-    
+
         Object o = ridcProperties.get("ROOTFFOLDERGUID");
-        if(o!= null){
-            logger.debug("ROOTFFOLDERGUID :"+o);
+        if (o != null) {
+            logger.debug("ROOTFFOLDERGUID :" + o);
             loadCategorias(o.toString());
-        }else{
+        } else {
             loadCategorias(ROOTFFOLDERGUID);
         }
 
@@ -105,7 +108,17 @@ public class ParametrosService {
         loadRequisitosTramite();
         loadIdiomas();
     }
-    
+
+    private void LoadTiposDocumentales(Integer idSubSerieDocumental) {
+
+        this.tiposDocumentales = new ArrayList<SelectItem>();
+        this.tiposDocumentales = webCCServiceFacade.getTiposDocumentalesBySubSerie(idSubSerieDocumental)
+                                                   .stream()
+                                                   .map(p -> new SelectItem(p.getIdtipodocumental(), p.getTipodocumental()))
+                                                   .collect(Collectors.toList());
+
+    }
+
     private void loadTiposDocumentales() {
         this.tiposDocumentales.add(new SelectItem(1, "Tipo documental 1"));
         this.tiposDocumentales.add(new SelectItem(2, "Tipo documental 2"));
@@ -113,13 +126,13 @@ public class ParametrosService {
         this.tiposDocumentales.add(new SelectItem(4, "Tipo documental 4"));
         this.tiposDocumentales.add(new SelectItem(5, "Tipo documental 5"));
     }
-    
+
 
     private void loadEntidades() {
         this.entidades = comunicacionesService.getSgdEntidadFindAll()
-                                                .stream()
-                                                .map(p -> new SelectItem(p.getIdEntidad(), p.getNombre()))
-                                                .collect(Collectors.toList());
+                                              .stream()
+                                              .map(p -> new SelectItem(p.getIdEntidad(), p.getNombre()))
+                                              .collect(Collectors.toList());
     }
 
     private void loadRangoEdades() {
@@ -137,11 +150,10 @@ public class ParametrosService {
     }
 
     private void loadPoblacionVulnerable() {
-        this.poblacionVulnerable =
-            comunicacionesService.getSgdPoblacionVulnerableFindAll()
+        this.poblacionVulnerable = comunicacionesService.getSgdPoblacionVulnerableFindAll()
                                                         .stream()
                                                         .map(p -> new SelectItem(p.getIdPoblacionVulnerable(), p.getNombre()))
-                                 .collect(Collectors.toList());
+                                                        .collect(Collectors.toList());
     }
 
     private void loadTipoEmpresas() {
@@ -152,7 +164,7 @@ public class ParametrosService {
     }
 
     private void loadPaises() {
-        for(SgdPais pais : comunicacionesService.getSgdPaisFindAll()) {
+        for (SgdPais pais : comunicacionesService.getSgdPaisFindAll()) {
             paises.add(new SelectItem(pais.getId(), pais.getNombre()));
         }
         /*this.paises = comunicacionesService.getSgdPaisFindAll()
@@ -175,10 +187,10 @@ public class ParametrosService {
 
         }
     }
-    
-    public SgdTipoTramite getTipoTramiteById(Integer id){
+
+    public SgdTipoTramite getTipoTramiteById(Integer id) {
         try {
-           return comunicacionesService.getSgdTipoTramiteFindById(id);
+            return comunicacionesService.getSgdTipoTramiteFindById(id);
         } catch (Exception e) {
             logger.error("ParametrosService getTipoTramiteById Exception", e);
             return null;
@@ -203,15 +215,15 @@ public class ParametrosService {
     public void loadIdiomas() {
         try {
             this.lstIdioma = comunicacionesService.getSgdIdiomaComFindAll()
-                                                   .stream()
-                                                   .map(p -> new SelectItem(p.getIdIdiomaCom(), p.getNombre()))
-                                                   .collect(Collectors.toList());
+                                                  .stream()
+                                                  .map(p -> new SelectItem(p.getIdIdiomaCom(), p.getNombre()))
+                                                  .collect(Collectors.toList());
         } catch (Exception e) {
             logger.error("loadIdiomas -> Error al obtener los tipos de envío de la BD", e);
             this.lstIdioma.add(new SelectItem(2, "Otro"));
         }
     }
-    
+
     private void loadTipoEnvios() {
         try {
             this.tipoEnvios = comunicacionesService.getSgdTipoEnvioFindAll()
@@ -228,7 +240,7 @@ public class ParametrosService {
 
     private void loadCategorias(String guid) {
         categorias = new ArrayList<SelectItem>();
-        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(guid)) {
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(guid)) {
             categorias.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
         /*this.categorias = webCCServiceFacade.getFolderfoldersFindByParent(guid)
@@ -239,7 +251,7 @@ public class ParametrosService {
 
     private void loadProcesos(String fParentGUID) {
         procesos = new ArrayList<SelectItem>();
-        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             procesos.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
         /*this.procesos = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
@@ -249,8 +261,8 @@ public class ParametrosService {
     }
 
     private void loadSeries(String fParentGUID) {
-        series  = new ArrayList<SelectItem>();
-        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+        series = new ArrayList<SelectItem>();
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             series.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
         /*this.series = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
@@ -260,8 +272,8 @@ public class ParametrosService {
     }
 
     private void loadSubseries(String fParentGUID) {
-        subseries =  new ArrayList<SelectItem>();
-        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+        subseries = new ArrayList<SelectItem>();
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             subseries.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
         /*this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
@@ -271,8 +283,8 @@ public class ParametrosService {
     }
 
     private void loadExpedientes(String fParentGUID) {
-        expedientes  = new ArrayList<SelectItem>();
-        for(Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+        expedientes = new ArrayList<SelectItem>();
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
             expedientes.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
         }
         /*this.expedientes = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
@@ -303,7 +315,7 @@ public class ParametrosService {
                                                     .map(p -> new SelectItem(p.getIdMunicipio(), p.getNombre()))
                                                     .collect(Collectors.toList());
         }
-        
+
         return ciudadMunicipios;
     }
 
@@ -330,10 +342,12 @@ public class ParametrosService {
             this.dependencias.add(new SelectItem("3", "DEPENDENCIA_Test3"));
         }
     }
-    
+
     private void loadRequisitosTramite() {
         requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
-        requisitosTramite.add(new Requisito(1, "4333.2 - Copia del documento de identidad del solicitante por ambos lados", false));
+        requisitosTramite.add(new Requisito(1,
+                                            "4333.2 - Copia del documento de identidad del solicitante por ambos lados",
+                                            false));
         requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
     }
 
@@ -391,7 +405,7 @@ public class ParametrosService {
         return usuarios;
 
     }
-    
+
     public List<SelectItem> getUsuariosAprobadores(Integer codDependencia) {
         List<SelectItem> usuarios = new ArrayList<>();
         usuarios = comunicacionesService.getSgdUsuarioFindByApprovers(codDependencia)
@@ -400,14 +414,14 @@ public class ParametrosService {
                                         .collect(Collectors.toList());
         return usuarios;
     }
-    
-    public List<SelectItem> getTipoCanalesByTipoCom(String tipoCom){
+
+    public List<SelectItem> getTipoCanalesByTipoCom(String tipoCom) {
         //F -> Fisica, E -> Electronica
-        if("F".equals(tipoCom)){
+        if ("F".equals(tipoCom)) {
             tiposCanal.clear();
             tiposCanal.add(new SelectItem(1, "Empresa Mensajeria"));
             tiposCanal.add(new SelectItem(2, "Presencial"));
-        }else{
+        } else {
             tiposCanal.clear();
             tiposCanal.add(new SelectItem(3, "Mail"));
             tiposCanal.add(new SelectItem(4, "Pagina Web"));
@@ -416,57 +430,59 @@ public class ParametrosService {
         }
         return tiposCanal;
     }
-    
-    public List<SelectItem> getLocalidades(){
-        
+
+    public List<SelectItem> getLocalidades() {
+
         lstLocalidad.add(new SelectItem(1, "Localidad 1"));
         lstLocalidad.add(new SelectItem(2, "Localidad 2"));
         lstLocalidad.add(new SelectItem(3, "Localidad 3"));
-       
+
         return lstLocalidad;
     }
-    
-    public List<SelectItem> getUPZs(){
-        
+
+    public List<SelectItem> getUPZs() {
+
         lstUpz.add(new SelectItem(1, "UPZ 1"));
         lstUpz.add(new SelectItem(2, "UPZ 2"));
         lstUpz.add(new SelectItem(3, "UPZ 3"));
-       
+
         return lstUpz;
     }
-    
-    public List<SelectItem> getBarrios(){
-        
+
+    public List<SelectItem> getBarrios() {
+
         lstBarrio.add(new SelectItem(1, "Barrio 1"));
         lstBarrio.add(new SelectItem(2, "Barrio 2"));
         lstBarrio.add(new SelectItem(3, "Barrio 3"));
-       
+
         return lstBarrio;
     }
 
-    
+
     private void loadGruposValor() {
-        this.gruposValor = comunicacionesService.getSgdGruposValorFindAll().stream()
-                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
-                                                       .collect(Collectors.toList());
+        this.gruposValor = comunicacionesService.getSgdGruposValorFindAll()
+                                                .stream()
+                                                .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                .collect(Collectors.toList());
     }
 
     private void loadParentescos() {
-        this.parentescos = comunicacionesService.getSgdParentescoFindAll().stream()
-                                                       .map(p -> new SelectItem(p.getId(), p.getNombre()))
-                                                       .collect(Collectors.toList());
+        this.parentescos = comunicacionesService.getSgdParentescoFindAll()
+                                                .stream()
+                                                .map(p -> new SelectItem(p.getId(), p.getNombre()))
+                                                .collect(Collectors.toList());
     }
-    
+
     public List<SgdEntidad> getEntidadesByNitName(Integer nit, String name) {
-        
+
         return comunicacionesService.getSgdEntidadFindByNameNit(nit, name);
     }
-    
+
     public List<SgdRemitente> getRemitentesByIdName(Long id, String name) {
-        
+
         return comunicacionesService.getSgdRemitenteFindByIdNombre(id, name);
     }
-    
+
 
     public void setParentescos(List<SelectItem> parentescos) {
         this.parentescos = parentescos;
@@ -609,6 +625,48 @@ public class ParametrosService {
 
     public List<SelectItem> getLstIdioma() {
         return lstIdioma;
+    }
+
+    public List<SelectItem> getTiposDocumentalesByCategorizacion(String unidadProductora, String serie,
+                                                                 String subSerie) {
+        this.LoadTiposDocumentales(this.getIdSubSerieDocumentalByTitulosCategorizacion(unidadProductora, serie,
+                                                                                       subSerie));
+        return this.tiposDocumentales;
+
+    }
+
+    private Integer getIdSubSerieDocumentalByTitulosCategorizacion(String unidadProductora, String serie,
+                                                                   String subSerie) {
+        logger.debug("getting idSubSerieDocumental from /" + unidadProductora + "/" + serie + "/" + subSerie);
+        Integer idSubSerieDocumental = null;
+        if (unidadProductora != null && unidadProductora.length() > 0 && serie != null && serie.length() > 0 &&
+            subSerie != null && subSerie.length() > 0) {
+            logger.debug("Codes : {codigoUnidadProductora :" +
+                         unidadProductora.substring(0, unidadProductora.indexOf(' ')) + ", codigoSerieDocumental : " +
+                         serie.substring(0, serie.indexOf(' ')) + "," 
+                         + " codigoSubSerieDocumental : "+subSerie.substring(0, subSerie.indexOf(' '))+"}");
+            Integer codigoUnidadProductora =
+                Integer.valueOf(unidadProductora.substring(0, unidadProductora.indexOf(' ')));
+            Integer codigoSerieDocumental = Integer.valueOf(serie.substring(0, serie.indexOf(' ')));
+            Integer codigoSubSerieDocumental = Integer.valueOf(subSerie.substring(0, subSerie.indexOf(' ')));
+
+            if (codigoUnidadProductora != null && codigoSerieDocumental != null && codigoSubSerieDocumental != null) {
+
+                Integer idUnidadProductora = webCCServiceFacade.getIdUnidadProductora(codigoUnidadProductora);
+                Integer idSerieDocumental = null;
+                if (idUnidadProductora != null)
+                    idSerieDocumental =
+                        webCCServiceFacade.getIdSerieDocumental(codigoSerieDocumental, idUnidadProductora);
+
+                if (idSerieDocumental != null)
+                    idSubSerieDocumental =
+                        webCCServiceFacade.getIdSerieDocumental(codigoSubSerieDocumental, idSerieDocumental);
+
+            }
+
+
+        }
+        return idSubSerieDocumental;
     }
 }
 
