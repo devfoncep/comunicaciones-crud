@@ -263,6 +263,13 @@ public class ComunicacionesServiceFacade {
     public List<SgdRangoEdad> getSgdRangoEdadFindAll() {
         return em.createNamedQuery("SgdRangoEdad.findAll", SgdRangoEdad.class).getResultList();
     }
+    //SgdComunicacion.findByNroRadicado
+
+    public List<SgdComunicacion> getSgdComunicacionByNroRadicado(String nroRadicado) {
+        return em.createNamedQuery("SgdComunicacion.findByNroRadicado", SgdComunicacion.class)
+          .setParameter("nroRadicado", nroRadicado)
+          .getResultList();
+    }
 
     public SgdComunicacion persistSgdComunicacion(SgdComunicacion sgdComunicacion) {
         em.persist(sgdComunicacion);
@@ -649,7 +656,7 @@ public class ComunicacionesServiceFacade {
     public List<SgdTipoTramite> getSgdTipoTramiteFindAll() {
         return em.createNamedQuery("SgdTipoTramite.findAll", SgdTipoTramite.class).getResultList();
     }
-    
+
     public SgdTipoTramite getSgdTipoTramiteFindById(Integer id) {
         return em.createNamedQuery("SgdTipoTramite.findById", SgdTipoTramite.class)
                  .setParameter("id", id)
@@ -669,7 +676,7 @@ public class ComunicacionesServiceFacade {
     public List<SgdTipoComInterna> getSgdTipoComInternaFindAll() {
         return em.createNamedQuery("SgdTipoComInterna.findAll", SgdTipoComInterna.class).getResultList();
     }
-    
+
     public List<SgdGruposValor> getSgdGruposValorFindAll() {
         return em.createNamedQuery("SgdGruposValor.findAll", SgdGruposValor.class).getResultList();
     }
@@ -677,7 +684,7 @@ public class ComunicacionesServiceFacade {
     public List<SgdParentesco> getSgdParentescoFindAll() {
         return em.createNamedQuery("SgdParentesco.findAll", SgdParentesco.class).getResultList();
     }
-    
+
     public List<SgdIdiomaCom> getSgdIdiomaComFindAll() {
         return em.createNamedQuery("SgdIdiomaCom.findAll", SgdIdiomaCom.class).getResultList();
     }

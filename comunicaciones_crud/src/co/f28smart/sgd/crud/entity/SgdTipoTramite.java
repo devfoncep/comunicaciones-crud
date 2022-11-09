@@ -14,12 +14,12 @@ import javax.persistence.Table;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "SgdTipoTramite.findAll", query = "select o from SgdTipoTramite o"),
+@NamedQueries({ @NamedQuery(name = "SgdTipoTramite.findAll", query = "select o from SgdTipoTramite o order by o.activo asc"),
                 @NamedQuery(name = "SgdTipoTramite.findById", 
                             query = "select o from SgdTipoTramite o where o.idTipoTramite = :id")})
 @Table(name = "SGD_TIPO_TRAMITE")
 public class SgdTipoTramite implements Serializable {
-    @SuppressWarnings("compatibility:7570316146848990074")
+    @SuppressWarnings("compatibility:7551031006938964257")
     private static final long serialVersionUID = -1341718912957311109L;
     
     @Id
@@ -33,6 +33,8 @@ public class SgdTipoTramite implements Serializable {
     private String descripcion;
     @Column(name = "DIAS_RESPUESTA", nullable = false)
     private Integer diasRespuesta;
+    @Column(name="ACTIVO")
+    private Integer activo;
     
     
 
@@ -85,5 +87,13 @@ public class SgdTipoTramite implements Serializable {
 
     public Integer getDiasRespuesta() {
         return diasRespuesta;
+    }
+
+    public void setActivo(Integer activo) {
+        this.activo = activo;
+    }
+
+    public Integer getActivo() {
+        return activo;
     }
 }

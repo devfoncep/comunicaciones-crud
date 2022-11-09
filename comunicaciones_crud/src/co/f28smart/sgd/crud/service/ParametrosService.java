@@ -660,7 +660,7 @@ public class ParametrosService {
 
                 if (idSerieDocumental != null)
                     idSubSerieDocumental =
-                        webCCServiceFacade.getIdSerieDocumental(codigoSubSerieDocumental, idSerieDocumental);
+                        webCCServiceFacade.getIdSubSerieDocumental(codigoSubSerieDocumental, idSerieDocumental);
 
             }
 
