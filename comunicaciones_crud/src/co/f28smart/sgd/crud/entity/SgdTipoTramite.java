@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "SgdTipoTramite.findAll", query = "select o from SgdTipoTramite o order by o.activo asc"),
+@NamedQueries({ @NamedQuery(name = "SgdTipoTramite.findAll", query = "select o from SgdTipoTramite o where o.activo = 1 order by o.nombre asc"),
                 @NamedQuery(name = "SgdTipoTramite.findById", 
                             query = "select o from SgdTipoTramite o where o.idTipoTramite = :id")})
 @Table(name = "SGD_TIPO_TRAMITE")
