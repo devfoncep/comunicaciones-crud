@@ -6,6 +6,7 @@ import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
 import co.f28smart.sgd.crud.entity.SgdPais;
 import co.f28smart.sgd.crud.entity.SgdRemitente;
+import co.f28smart.sgd.crud.entity.SgdTipoReqTramite;
 import co.f28smart.sgd.crud.entity.SgdTipoTramite;
 import co.f28smart.sgd.crud.facade.ComunicacionesServiceFacade;
 import co.f28smart.sgd.crud.facade.WebCCServiceFacade;
@@ -105,7 +106,6 @@ public class ParametrosService {
         loadTiposDocumentales();
         loadGruposValor();
         loadParentescos();
-        loadRequisitosTramite();
         loadIdiomas();
     }
 
@@ -343,14 +343,6 @@ public class ParametrosService {
         }
     }
 
-    private void loadRequisitosTramite() {
-        requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
-        requisitosTramite.add(new Requisito(1,
-                                            "4333.2 - Copia del documento de identidad del solicitante por ambos lados",
-                                            false));
-        requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
-    }
-
 
     private void loadTipoAnexosFisicos() {
         try {
@@ -457,6 +449,24 @@ public class ParametrosService {
 
         return lstBarrio;
     }
+    
+    
+    public List<Requisito> getTipoReqTramiteByTipoTramite(final Integer idTipoTramite) {
+        try{
+            return comunicacionesService.getSgdTipoReqTramiteFindByTipoTramite(idTipoTramite)
+                                                 .stream()
+                                                 .map(p -> new Requisito(p.getId(), p.getCodigo()+"-"+p.getNombre(), false))
+                                                 .collect(Collectors.toList());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("Error al obtener los tipos de requisitos tramite de la BD", e);
+
+            requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
+            requisitosTramite.add(new Requisito(1, "4333.2 - Copia del documento de identidad del solicitante por ambos lados", false));
+            requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
+            return requisitosTramite;
+        }
+    }
 
 
     private void loadGruposValor() {
@@ -483,7 +493,6 @@ public class ParametrosService {
         return comunicacionesService.getSgdRemitenteFindByIdNombre(id, name);
     }
 
-
     public void setParentescos(List<SelectItem> parentescos) {
         this.parentescos = parentescos;
     }
@@ -508,7 +517,6 @@ public class ParametrosService {
         return requisitosTramite;
     }
 
-
     public List<SelectItem> getTipoTramites() {
         return tipoTramites;
     }
@@ -527,12 +535,10 @@ public class ParametrosService {
         return procesos;
     }
 
-
     public List<SelectItem> getSeries(String fParentGUID) {
         loadSeries(fParentGUID);
         return series;
     }
-
 
     public List<SelectItem> getSubseries(String fParentGUID) {
         loadSubseries(fParentGUID);
@@ -544,11 +550,9 @@ public class ParametrosService {
         return expedientes;
     }
 
-
     public List<SelectItem> getDependencias() {
         return dependencias;
     }
-
 
     public List<SelectItem> getTipoAnexosFisicos() {
         return tipoAnexosFisicos;

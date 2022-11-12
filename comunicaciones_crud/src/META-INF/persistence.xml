@@ -44,6 +44,7 @@
         <class>co.f28smart.sgd.crud.entity.SgdPlantilla</class>
         <class>co.f28smart.sgd.crud.entity.SgdEtnia</class>
         <class>co.f28smart.sgd.crud.entity.SgdIdiomaCom</class>
+        <class>co.f28smart.sgd.crud.entity.SgdTipoReqTramite</class>
         <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="jdbc/ComunicacionesDS"/>
