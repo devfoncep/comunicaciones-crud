@@ -19,7 +19,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdComunicacion.findAll", query = "select o from SgdComunicacion o"),
-                @NamedQuery(name = "SgdComunicacion.findByNroRadicado", query = "select o from SgdComunicacion o where o.nroRadicado = :nroRadicado ")})
+                @NamedQuery(name = "SgdComunicacion.findByNroRadicado", query = "select o from SgdComunicacion o where o.nroRadicado like :nroRadicado ")})
 @Table(name = "SGD_COMUNICACION")
 public class SgdComunicacion implements Serializable {
     @SuppressWarnings("compatibility:2548931255626527989")
