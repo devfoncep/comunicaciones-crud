@@ -29,6 +29,7 @@ import co.f28smart.sgd.crud.entity.SgdTipoComInterna;
 import co.f28smart.sgd.crud.entity.SgdTipoEmpresa;
 import co.f28smart.sgd.crud.entity.SgdTipoEnvio;
 import co.f28smart.sgd.crud.entity.SgdTipoIdentificacion;
+import co.f28smart.sgd.crud.entity.SgdTipoReqTramite;
 import co.f28smart.sgd.crud.entity.SgdTipoSolicitud;
 import co.f28smart.sgd.crud.entity.SgdTipoTitulo;
 import co.f28smart.sgd.crud.entity.SgdTipoTramite;
@@ -687,5 +688,15 @@ public class ComunicacionesServiceFacade {
 
     public List<SgdIdiomaCom> getSgdIdiomaComFindAll() {
         return em.createNamedQuery("SgdIdiomaCom.findAll", SgdIdiomaCom.class).getResultList();
+    }
+    
+    public List<SgdTipoReqTramite> getSgdTipoReqTramiteFindAll() {
+        return em.createNamedQuery("SgdTipoReqTramite.findAll", SgdTipoReqTramite.class).getResultList();
+    }
+
+    public List<SgdTipoReqTramite> getSgdTipoReqTramiteFindByTipoTramite(Integer idTipoTramite) {
+        return em.createNamedQuery("SgdTipoReqTramite.findByTipoTramite", SgdTipoReqTramite.class)
+                 .setParameter("idTipoTramite", idTipoTramite)
+                 .getResultList();
     }
 }
