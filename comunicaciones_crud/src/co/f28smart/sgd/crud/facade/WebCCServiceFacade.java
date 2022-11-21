@@ -94,13 +94,19 @@ public class WebCCServiceFacade {
                  .getResultList();
     }
 
+    public Folderfolders getFolderfoldersByFfolderguid(String ffolderguid) {
+        return em.createNamedQuery("Folderfolders.findByFfolderguid", Folderfolders.class)
+                 .setParameter("param", ffolderguid)
+                 .getSingleResult();
+    }
+
     public Integer getIdFondoDocumental(Integer codigo) {
         try {
             return em.createNamedQuery("FoncepTbFondodocumental.findIdByCode", Integer.class)
                      .setParameter("param", codigo)
                      .getSingleResult();
         } catch (Exception e) {
-            logger.error("Error al obtener el IdFondoDocumental por el codigo :"+codigo, e);
+            logger.error("Error al obtener el IdFondoDocumental por el codigo :" + codigo, e);
             return null;
         }
     }
@@ -112,7 +118,8 @@ public class WebCCServiceFacade {
                      .setParameter("param1", idUnidadProductora)
                      .getSingleResult();
         } catch (Exception e) {
-            logger.error("Error al obtener el IdSerieDocumental por el codigo :"+codigo+" y  el idUnidadProductora :"+idUnidadProductora, e);
+            logger.error("Error al obtener el IdSerieDocumental por el codigo :" + codigo +
+                         " y  el idUnidadProductora :" + idUnidadProductora, e);
             return null;
         }
     }
@@ -158,9 +165,15 @@ public class WebCCServiceFacade {
                      .setParameter("param", idSubSerieDocumental)
                      .getResultList();
         } catch (Exception e) {
-            
+
             logger.error("Error al obtener TiposDocumentales por la SubSerie :" + idSubSerieDocumental, e);
             return new ArrayList<FoncepTbTipodocumental>();
         }
+    }
+
+    public FoncepTbTipodocumental getTipoDocumentalesById(Integer id) {
+        return em.createNamedQuery("FoncepTbTipodocumental.findById", FoncepTbTipodocumental.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
     }
 }

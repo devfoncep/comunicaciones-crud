@@ -18,6 +18,8 @@ import javax.persistence.Table;
                             query = "select o from FoncepTbTipodocumental o"),
                 @NamedQuery(name = "FoncepTbTipodocumental.findIdByCode",
                             query = "select o.idtipodocumental from FoncepTbTipodocumental o where o.codigotipodocumental = :param"),
+                @NamedQuery(name = "FoncepTbTipodocumental.findById",
+                            query = "select o from FoncepTbTipodocumental o where o.idtipodocumental = :param"),
                 @NamedQuery(name = "FoncepTbTipodocumental.findBySubSerieDocumental",
                             query = "select o from FoncepTbTipodocumental o where o.idsubseriedocumental = :param order by o.tipodocumental asc")})
 @Table(name = "FONCEP_TB_TIPODOCUMENTAL")
