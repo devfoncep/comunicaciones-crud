@@ -1,5 +1,7 @@
 package co.f28smart.sgd.crud.entity;
 
+import java.util.Objects;
+
 public class Requisito {
     private Integer id;
     private String requisito;
@@ -37,5 +39,19 @@ public class Requisito {
 
     public Integer getId() {
         return id;
+    }
+    
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        try {
+            sb.append(Objects.isNull(id) ? "" : id+" " );
+            sb.append(Objects.isNull(requisito) ? "" : requisito+" " );
+            sb.append(Objects.isNull(cumple) ? "" : cumple+" " );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        return sb.toString();
     }
 }
