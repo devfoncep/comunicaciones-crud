@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdDepartamento.findAll", 
-                            query = "select o from SgdDepartamento o where o.vigente = 1") })
+                            query = "select o from SgdDepartamento o where o.vigente = 1 order by o.nombre") })
 @Table(name = "SGD_DEPARTAMENTO")
 public class SgdDepartamento implements Serializable {
     @SuppressWarnings("oracle.jdeveloper.java.serialversionuid-stale")
