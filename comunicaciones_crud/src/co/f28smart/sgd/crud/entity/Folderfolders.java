@@ -21,7 +21,9 @@ import javax.persistence.NamedQuery;
                 @NamedQuery(name = "Folderfolders.findRootByFolderGUID",
                             query = "select o from Folderfolders o where o.ffolderguid = :param  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findByParent",
-                            query = "select o from Folderfolders o where o.fparentguid = :param order by o.ffoldername asc")
+                            query = "select o from Folderfolders o where o.fparentguid = :param order by o.ffoldername asc"),
+                @NamedQuery(name = "Folderfolders.findByFfolderguid",
+                            query = "select o from Folderfolders o where o.ffolderguid = :param order by o.ffoldername asc")
     })
 public class Folderfolders implements Serializable {
     @SuppressWarnings("compatibility:1508485305770897797")

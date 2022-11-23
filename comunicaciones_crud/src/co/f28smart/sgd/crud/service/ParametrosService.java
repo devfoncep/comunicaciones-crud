@@ -61,7 +61,7 @@ public class ParametrosService {
     private List<SelectItem> lstIdioma = new ArrayList<>();
 
     final ComunicacionesServiceFacade comunicacionesService;
-    final WebCCServiceFacade webCCServiceFacade = new WebCCServiceFacade();
+    final WebCCServiceFacade webCCServiceFacade;
 
 
     public ParametrosService(String ridcPropertiesFileName) {
@@ -69,6 +69,7 @@ public class ParametrosService {
         logger = Logger.getLogger(this.getClass().getSimpleName());
         logger.debug("# " + this.getClass().getSimpleName());
         comunicacionesService = new ComunicacionesServiceFacade();
+        webCCServiceFacade = new WebCCServiceFacade();
 
         Properties ridcProperties = new Properties();
         String ruta = System.getProperty("user.dir") + "/config/SGD/" + ridcPropertiesFileName;
@@ -596,6 +597,10 @@ public class ParametrosService {
 
     public ComunicacionesServiceFacade getComunicacionesService() {
         return comunicacionesService;
+    }
+    
+    public WebCCServiceFacade getWebCCServiceFacade(){
+        return webCCServiceFacade;
     }
 
     public List<SelectItem> getEntidades() {
