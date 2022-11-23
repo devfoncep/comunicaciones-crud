@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
     })
 @Table(name = "SGD_REMITENTE")
 public class SgdRemitente implements Serializable {
-    @SuppressWarnings("compatibility:4447139950794451058")
+    @SuppressWarnings("compatibility:3055226622659022595")
     private static final long serialVersionUID = 1L;
     @Column(length = 20)
     private String cargo;
@@ -54,7 +54,7 @@ public class SgdRemitente implements Serializable {
     private String nombreCompleto;
     @Id
     @Column(name = "NO_IDENTIFICACION", nullable = false)
-    private Long noIdentificacion;
+    private String noIdentificacion;
     @Column(length = 20)
     private String telefono;
     @Column(length = 20)
@@ -72,7 +72,7 @@ public class SgdRemitente implements Serializable {
     public SgdRemitente(String cargo, String celular, String direccion, String email, Date fechaActualizacion,
                         Date fechaCreacion, Long idDepartamento, Long idEtnia, Long idMunicipio,
                         Long idPais, Long idPoblacionVulnerable, Long idRangoEdad,
-                        Integer idTipoIdentificacion, Long nitEntidad, Long noIdentificacion,
+                        Integer idTipoIdentificacion, Long nitEntidad, String noIdentificacion,
                         String nombreCompleto, String telefono, String titulo, String usuarioActualizacion,
                         String usuarioCreacion) {
         this.cargo = cargo;
@@ -211,11 +211,11 @@ public class SgdRemitente implements Serializable {
         this.nombreCompleto = nombreCompleto;
     }
 
-    public Long getNoIdentificacion() {
+    public String getNoIdentificacion() {
         return noIdentificacion;
     }
 
-    public void setNoIdentificacion(Long noIdentificacion) {
+    public void setNoIdentificacion(String noIdentificacion) {
         this.noIdentificacion = noIdentificacion;
     }
 

@@ -18,8 +18,9 @@ import javax.persistence.TemporalType;
                 @NamedQuery(name = "SgdEntidad.findById", query = "select o from SgdEntidad o where o.idEntidad = :id")})
 @Table(name = "SGD_ENTIDAD")
 public class SgdEntidad implements Serializable {
-    private static final long serialVersionUID = -5647801916819121870L;
-    
+    @SuppressWarnings("compatibility:9013784922278473244")
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "ID_ENTIDAD", nullable = false)
     private Long idEntidad;

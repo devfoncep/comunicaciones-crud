@@ -20,6 +20,7 @@ import javax.persistence.TemporalType;
                             query = "select o from SgdDepartamento o where o.vigente = 1") })
 @Table(name = "SGD_DEPARTAMENTO")
 public class SgdDepartamento implements Serializable {
+    @SuppressWarnings("oracle.jdeveloper.java.serialversionuid-stale")
     private static final long serialVersionUID = -2443379136011167450L;
     
     @Id

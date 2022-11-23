@@ -489,7 +489,7 @@ public class ParametrosService {
         return comunicacionesService.getSgdEntidadFindByNameNit(nit, name);
     }
 
-    public List<SgdRemitente> getRemitentesByIdName(Long id, String name) {
+    public List<SgdRemitente> getRemitentesByIdName(String id, String name) {
 
         return comunicacionesService.getSgdRemitenteFindByIdNombre(id, name);
     }
