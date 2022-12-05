@@ -16,6 +16,10 @@ import javax.persistence.Table;
 @Entity
 @NamedQueries({ @NamedQuery(name = "FoncepTbSeriedocumental.findAll",
                             query = "select o from FoncepTbSeriedocumental o"),
+                @NamedQuery(name = "FoncepTbSeriedocumental.findByIdUnidadProductora",
+                            query = "select o from FoncepTbSeriedocumental o where o.idseriedocumental = :param"),
+                @NamedQuery(name = "FoncepTbSeriedocumental.findById",
+                            query = "select o from FoncepTbSeriedocumental o where o.idunidadproductora = :param order by o.seriedocumental asc"),
                 @NamedQuery(name = "FoncepTbSeriedocumental.findIdByCodeAndIdUnidadProductora",
                             query = "select o.idseriedocumental from FoncepTbSeriedocumental o where o.codigoserie = :param and o.idunidadproductora = :param1")})
 @Table(name = "FONCEP_TB_SERIEDOCUMENTAL")
