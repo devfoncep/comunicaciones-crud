@@ -15,14 +15,17 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "FoncepTbFondodocumental.findAll",
-                            query = "select o from FoncepTbFondodocumental o"),
+                            query = "select o from FoncepTbFondodocumental o order by o.fondo asc"),
                 @NamedQuery(name = "FoncepTbFondodocumental.findIdByCode",
-                            query = "select o.id from FoncepTbFondodocumental o where o.codigofondo = :param")})
+                            query = "select o.id from FoncepTbFondodocumental o where o.codigofondo = :param"),
+                @NamedQuery(name = "FoncepTbFondodocumental.findById",
+                            query = "select o.id from FoncepTbFondodocumental o where o.id = :param")})
 @Table(name = "FONCEP_TB_FONDODOCUMENTAL")
 public class FoncepTbFondodocumental implements Serializable {
     @SuppressWarnings("compatibility:1882481842952879497")
     private static final long serialVersionUID = 1L;
     private Integer codigofondo;
+    
     @Column(length = 60)
     private String fondo;
     @Id

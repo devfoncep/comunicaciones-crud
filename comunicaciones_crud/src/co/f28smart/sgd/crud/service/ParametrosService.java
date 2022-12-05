@@ -59,6 +59,7 @@ public class ParametrosService {
     private List<SelectItem> lstUpz = new ArrayList<>();
     private List<SelectItem> lstBarrio = new ArrayList<>();
     private List<SelectItem> lstIdioma = new ArrayList<>();
+    private List<SelectItem> fondosDocumentales = new ArrayList<>();
 
     final ComunicacionesServiceFacade comunicacionesService;
     final WebCCServiceFacade webCCServiceFacade;
@@ -108,6 +109,14 @@ public class ParametrosService {
         loadGruposValor();
         loadParentescos();
         loadIdiomas();
+        loadFondosDocumentales();
+    }
+
+    private void loadFondosDocumentales() {
+        this.fondosDocumentales = webCCServiceFacade.getFoncepTbFondosDocumentales()
+                                                    .stream()
+                                                    .map(p -> new SelectItem(p.getId(), p.getFondo()))
+                                                    .collect(Collectors.toList());
     }
 
     private void LoadTiposDocumentales(Integer idSubSerieDocumental) {
@@ -450,20 +459,22 @@ public class ParametrosService {
 
         return lstBarrio;
     }
-    
-    
+
+
     public List<Requisito> getTipoReqTramiteByTipoTramite(final Integer idTipoTramite) {
-        try{
+        try {
             return comunicacionesService.getSgdTipoReqTramiteFindByTipoTramite(idTipoTramite)
-                                                 .stream()
-                                                 .map(p -> new Requisito(p.getId(), p.getCodigo()+"-"+p.getNombre(), false))
-                                                 .collect(Collectors.toList());
+                                        .stream()
+                                        .map(p -> new Requisito(p.getId(), p.getCodigo() + "-" + p.getNombre(), false))
+                                        .collect(Collectors.toList());
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("Error al obtener los tipos de requisitos tramite de la BD", e);
 
             requisitosTramite.add(new Requisito(0, "4333.1 - Formulario unico de solicitudes prestacionales", false));
-            requisitosTramite.add(new Requisito(1, "4333.2 - Copia del documento de identidad del solicitante por ambos lados", false));
+            requisitosTramite.add(new Requisito(1,
+                                                "4333.2 - Copia del documento de identidad del solicitante por ambos lados",
+                                                false));
             requisitosTramite.add(new Requisito(2, "4333.3 - Registro civil de nacimiento del causante", false));
             return requisitosTramite;
         }
@@ -598,8 +609,8 @@ public class ParametrosService {
     public ComunicacionesServiceFacade getComunicacionesService() {
         return comunicacionesService;
     }
-    
-    public WebCCServiceFacade getWebCCServiceFacade(){
+
+    public WebCCServiceFacade getWebCCServiceFacade() {
         return webCCServiceFacade;
     }
 
@@ -652,8 +663,8 @@ public class ParametrosService {
             subSerie != null && subSerie.length() > 0) {
             logger.debug("Codes : {codigoUnidadProductora :" +
                          unidadProductora.substring(0, unidadProductora.indexOf(' ')) + ", codigoSerieDocumental : " +
-                         serie.substring(0, serie.indexOf(' ')) + "," 
-                         + " codigoSubSerieDocumental : "+subSerie.substring(0, subSerie.indexOf(' '))+"}");
+                         serie.substring(0, serie.indexOf(' ')) + "," + " codigoSubSerieDocumental : " +
+                         subSerie.substring(0, subSerie.indexOf(' ')) + "}");
             Integer codigoUnidadProductora =
                 Integer.valueOf(unidadProductora.substring(0, unidadProductora.indexOf(' ')));
             Integer codigoSerieDocumental = Integer.valueOf(serie.substring(0, serie.indexOf(' ')));
@@ -677,6 +688,56 @@ public class ParametrosService {
         }
         return idSubSerieDocumental;
     }
+
+    public List<SelectItem> getFondosDocumentales() {
+        return fondosDocumentales;
+    }
+
+    public List<SelectItem> getUnidadesProductorasByIdFondo(Integer id) {
+        if(id != null){
+        return webCCServiceFacade.getUnidadesProductorasByIdFondo(id)
+                                 .stream()
+                                 .map(p -> new SelectItem(p.getIdunidad(), p.getUnidad()))
+                                 .collect(Collectors.toList());
+        } else {
+            return new ArrayList<SelectItem>();
+        }
+    }
+
+    public List<SelectItem>  getSerieDocumentalesByIdUnidadProductora(Integer id) {
+        if  ( id != null){
+        return webCCServiceFacade.getSerieDocumentalesByIdUnidadProductora(id)
+                                 .stream()
+                                 .map(p -> new SelectItem(p.getIdseriedocumental(), p.getSeriedocumental()))
+                                 .collect(Collectors.toList());
+        }else{
+            return new ArrayList<SelectItem>();
+        }
+
+    }
+    
+    public List<SelectItem>  getSubSeriesDocumentalesByIdSerie(Integer id) {
+        if(id != null){
+        return webCCServiceFacade.getSubSeriesDocumentalesByIdSerie(id)
+                                 .stream()
+                                 .map(p -> new SelectItem(p.getIdsubserie(), p.getSubserie()))
+                                 .collect(Collectors.toList());
+        }else{
+            return new ArrayList<SelectItem>();
+        }
+    }
+    public List<SelectItem> getTiposDocumentalesBySubSerie(Integer id) {
+        if(id != null){
+        return webCCServiceFacade.getTiposDocumentalesBySubSerie(id)
+                                                   .stream()
+                                                   .map(p -> new SelectItem(p.getIdtipodocumental(), p.getTipodocumental()))
+                                                   .collect(Collectors.toList());
+        }else{
+            return new ArrayList<SelectItem>();
+        }
+
+    }
+
 }
 
 

@@ -15,8 +15,16 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "FoncepTbSubserie.findAll", query = "select o from FoncepTbSubserie o"),
+                @NamedQuery(name = "FoncepTbSubserie.findByIdSerie",
+                            query =
+                            "select o from FoncepTbSubserie o where o.idserie = :param order by o.subserie asc"),
+                @NamedQuery(name = "FoncepTbSubserie.findById",
+                            query =
+                            "select o from FoncepTbSubserie o where o.idsubserie = :param"),
                 @NamedQuery(name = "FoncepTbSubserie.findIdByCodeAndIdSerieDocumental",
-                            query = "select o.idsubserie from FoncepTbSubserie o where o.codigosubserie = :param and o.idserie = :param1")})
+                            query =
+                            "select o.idsubserie from FoncepTbSubserie o where o.codigosubserie = :param and o.idserie = :param1")
+    })
 @Table(name = "FONCEP_TB_SUBSERIE")
 public class FoncepTbSubserie implements Serializable {
     @SuppressWarnings("compatibility:4873862971804842299")
@@ -38,9 +46,9 @@ public class FoncepTbSubserie implements Serializable {
     public FoncepTbSubserie() {
     }
 
-    public FoncepTbSubserie(Integer codigosubserie, String descripcionsubserie, Integer idserie,
-                            Integer idsubserie, Timestamp schcreatetimestamp, Timestamp schmodifytimestamp,
-                            String schsourceid, String subserie) {
+    public FoncepTbSubserie(Integer codigosubserie, String descripcionsubserie, Integer idserie, Integer idsubserie,
+                            Timestamp schcreatetimestamp, Timestamp schmodifytimestamp, String schsourceid,
+                            String subserie) {
         this.codigosubserie = codigosubserie;
         this.descripcionsubserie = descripcionsubserie;
         this.idserie = idserie;

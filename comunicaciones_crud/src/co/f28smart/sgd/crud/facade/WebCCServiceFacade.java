@@ -3,7 +3,12 @@ package co.f28smart.sgd.crud.facade;
 import co.f28smart.sgd.crud.entity.Folderfiles;
 import co.f28smart.sgd.crud.entity.Folderfolders;
 
+import co.f28smart.sgd.crud.entity.FoncepTbFondodocumental;
+import co.f28smart.sgd.crud.entity.FoncepTbSeriedocumental;
+import co.f28smart.sgd.crud.entity.FoncepTbSubserie;
 import co.f28smart.sgd.crud.entity.FoncepTbTipodocumental;
+
+import co.f28smart.sgd.crud.entity.FoncepTbUnidadproductora;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -100,6 +105,16 @@ public class WebCCServiceFacade {
                  .getSingleResult();
     }
 
+    public List<FoncepTbFondodocumental> getFoncepTbFondosDocumentales() {
+        return em.createNamedQuery("FoncepTbFondodocumental.findAll", FoncepTbFondodocumental.class).getResultList();
+    }
+
+    public FoncepTbFondodocumental getFoncepTbFondoDocumentalById(Integer id) {
+        return em.createNamedQuery("FoncepTbFondodocumental.findById", FoncepTbFondodocumental.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
+    }
+
     public Integer getIdFondoDocumental(Integer codigo) {
         try {
             return em.createNamedQuery("FoncepTbFondodocumental.findIdByCode", Integer.class)
@@ -109,6 +124,18 @@ public class WebCCServiceFacade {
             logger.error("Error al obtener el IdFondoDocumental por el codigo :" + codigo, e);
             return null;
         }
+    }
+
+    public List<FoncepTbSeriedocumental> getSerieDocumentalesByIdUnidadProductora(Integer id) {
+        return em.createNamedQuery("FoncepTbSeriedocumental.findByIdUnidadProductora", FoncepTbSeriedocumental.class)
+                 .setParameter("param", id)
+                 .getResultList();
+    }
+
+    public FoncepTbSeriedocumental getSerieDocumentaById(Integer id) {
+        return em.createNamedQuery("FoncepTbSeriedocumental.findById", FoncepTbSeriedocumental.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
     }
 
     public Integer getIdSerieDocumental(Integer codigo, Integer idUnidadProductora) {
@@ -122,6 +149,18 @@ public class WebCCServiceFacade {
                          " y  el idUnidadProductora :" + idUnidadProductora, e);
             return null;
         }
+    }
+    
+    public List<FoncepTbSubserie> getSubSeriesDocumentalesByIdSerie(Integer id) {
+        return em.createNamedQuery("FoncepTbSubserie.findByIdSerie", FoncepTbSubserie.class)
+                 .setParameter("param", id)
+                 .getResultList();
+    }
+
+    public FoncepTbSubserie getSubSerieDocumentalById(Integer id) {
+        return em.createNamedQuery("FoncepTbSubserie.findById", FoncepTbSubserie.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
     }
 
     public Integer getIdSubSerieDocumental(Integer codigo, Integer idSerieDocumental) {
@@ -146,6 +185,18 @@ public class WebCCServiceFacade {
             logger.error("Error al obtener el IdTipoDocumental por el codigo :" + codigo, e);
             return null;
         }
+    }
+    
+    public List<FoncepTbUnidadproductora> getUnidadesProductorasByIdFondo(Integer id) {
+        return em.createNamedQuery("FoncepTbUnidadproductora.findByIdFondoDocumental", FoncepTbUnidadproductora.class)
+                 .setParameter("param", id)
+                 .getResultList();
+    }
+
+    public FoncepTbUnidadproductora getUnidadProductoraById(Integer id) {
+        return em.createNamedQuery("FoncepTbUnidadproductora.findById", FoncepTbUnidadproductora.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
     }
 
     public Integer getIdUnidadProductora(Integer codigo) {
