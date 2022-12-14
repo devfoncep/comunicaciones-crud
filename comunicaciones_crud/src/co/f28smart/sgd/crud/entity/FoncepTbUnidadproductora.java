@@ -17,9 +17,9 @@ import javax.persistence.Table;
 @NamedQueries({ @NamedQuery(name = "FoncepTbUnidadproductora.findAll",
                             query = "select o from FoncepTbUnidadproductora o"),
                 @NamedQuery(name = "FoncepTbUnidadproductora.findByIdFondoDocumental",
-                            query = "select o from FoncepTbUnidadproductora o where o.idfondodocumental = :paran order by asc o.unidadproductora"),
+                            query = "select o from FoncepTbUnidadproductora o where o.idfondodocumental = :param order by o.unidadproductora asc"),
                 @NamedQuery(name = "FoncepTbUnidadproductora.findById",
-                            query = "select o from FoncepTbUnidadproductora o where o.idunidad = :paran"),
+                            query = "select o from FoncepTbUnidadproductora o where o.idunidad = :param"),
                 @NamedQuery(name = "FoncepTbUnidadproductora.findIdByCode",
                             query = "select o.idunidad from FoncepTbUnidadproductora o where o.codigounidad = :param")})
 @Table(name = "FONCEP_TB_UNIDADPRODUCTORA")

@@ -628,6 +628,15 @@ public class ParametrosService {
     }
 
 
+    public void setROOTFFOLDERGUID(String ROOTFFOLDERGUID) {
+        this.ROOTFFOLDERGUID = ROOTFFOLDERGUID;
+    }
+
+    public String getROOTFFOLDERGUID() {
+        return ROOTFFOLDERGUID;
+    }
+
+
     public String findLabel(Object value, List<SelectItem> itemList) {
         String label = "";
         for (SelectItem si : itemList) {
@@ -694,50 +703,61 @@ public class ParametrosService {
     }
 
     public List<SelectItem> getUnidadesProductorasByIdFondo(Integer id) {
-        if(id != null){
-        return webCCServiceFacade.getUnidadesProductorasByIdFondo(id)
-                                 .stream()
-                                 .map(p -> new SelectItem(p.getIdunidad(), p.getUnidad()))
-                                 .collect(Collectors.toList());
+        if (id != null) {
+            return webCCServiceFacade.getUnidadesProductorasByIdFondo(id)
+                                     .stream()
+                                     .map(p -> new SelectItem(p.getIdunidad(), p.getUnidad()))
+                                     .collect(Collectors.toList());
         } else {
             return new ArrayList<SelectItem>();
         }
     }
 
-    public List<SelectItem>  getSerieDocumentalesByIdUnidadProductora(Integer id) {
-        if  ( id != null){
-        return webCCServiceFacade.getSerieDocumentalesByIdUnidadProductora(id)
-                                 .stream()
-                                 .map(p -> new SelectItem(p.getIdseriedocumental(), p.getSeriedocumental()))
-                                 .collect(Collectors.toList());
-        }else{
+    public List<SelectItem> getSerieDocumentalesByIdUnidadProductora(Integer id) {
+        if (id != null) {
+            return webCCServiceFacade.getSerieDocumentalesByIdUnidadProductora(id)
+                                     .stream()
+                                     .map(p -> new SelectItem(p.getIdseriedocumental(), p.getSeriedocumental()))
+                                     .collect(Collectors.toList());
+        } else {
             return new ArrayList<SelectItem>();
         }
 
     }
-    
-    public List<SelectItem>  getSubSeriesDocumentalesByIdSerie(Integer id) {
-        if(id != null){
-        return webCCServiceFacade.getSubSeriesDocumentalesByIdSerie(id)
-                                 .stream()
-                                 .map(p -> new SelectItem(p.getIdsubserie(), p.getSubserie()))
-                                 .collect(Collectors.toList());
-        }else{
+
+    public List<SelectItem> getSubSeriesDocumentalesByIdSerie(Integer id) {
+        if (id != null) {
+            return webCCServiceFacade.getSubSeriesDocumentalesByIdSerie(id)
+                                     .stream()
+                                     .map(p -> new SelectItem(p.getIdsubserie(), p.getSubserie()))
+                                     .collect(Collectors.toList());
+        } else {
             return new ArrayList<SelectItem>();
         }
     }
+
     public List<SelectItem> getTiposDocumentalesBySubSerie(Integer id) {
-        if(id != null){
-        return webCCServiceFacade.getTiposDocumentalesBySubSerie(id)
-                                                   .stream()
-                                                   .map(p -> new SelectItem(p.getIdtipodocumental(), p.getTipodocumental()))
-                                                   .collect(Collectors.toList());
-        }else{
+        if (id != null) {
+            return webCCServiceFacade.getTiposDocumentalesBySubSerie(id)
+                                     .stream()
+                                     .map(p -> new SelectItem(p.getIdtipodocumental(), p.getTipodocumental()))
+                                     .collect(Collectors.toList());
+        } else {
             return new ArrayList<SelectItem>();
         }
 
     }
 
+    public List<SelectItem> getOptionsForMetadata(String key) {
+        if (key != null && !key.isEmpty()) {
+            return webCCServiceFacade.getOpcionesByKey(key)
+                                     .stream()
+                                     .map(p -> new SelectItem(p.getDoption(), p.getDoption()))
+                                     .collect(Collectors.toList());
+        } else {
+            return new ArrayList<SelectItem>();
+        }
+    }
 }
 
 

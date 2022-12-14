@@ -10,6 +10,8 @@ import co.f28smart.sgd.crud.entity.FoncepTbTipodocumental;
 
 import co.f28smart.sgd.crud.entity.FoncepTbUnidadproductora;
 
+import co.f28smart.sgd.crud.entity.Optionslist;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,7 +152,7 @@ public class WebCCServiceFacade {
             return null;
         }
     }
-    
+
     public List<FoncepTbSubserie> getSubSeriesDocumentalesByIdSerie(Integer id) {
         return em.createNamedQuery("FoncepTbSubserie.findByIdSerie", FoncepTbSubserie.class)
                  .setParameter("param", id)
@@ -186,7 +188,7 @@ public class WebCCServiceFacade {
             return null;
         }
     }
-    
+
     public List<FoncepTbUnidadproductora> getUnidadesProductorasByIdFondo(Integer id) {
         return em.createNamedQuery("FoncepTbUnidadproductora.findByIdFondoDocumental", FoncepTbUnidadproductora.class)
                  .setParameter("param", id)
@@ -226,5 +228,11 @@ public class WebCCServiceFacade {
         return em.createNamedQuery("FoncepTbTipodocumental.findById", FoncepTbTipodocumental.class)
                  .setParameter("param", id)
                  .getSingleResult();
+    }
+
+    public List<Optionslist> getOpcionesByKey(String key) {
+        return em.createNamedQuery("Optionslist.findByKey", Optionslist.class)
+                 .setParameter("param", key)
+                 .getResultList();
     }
 }
