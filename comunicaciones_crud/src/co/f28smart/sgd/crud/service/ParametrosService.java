@@ -1,6 +1,7 @@
 package co.f28smart.sgd.crud.service;
 
 
+import co.f28smart.sgd.crud.entity.Folderfiles;
 import co.f28smart.sgd.crud.entity.Folderfolders;
 import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
@@ -757,6 +758,18 @@ public class ParametrosService {
         } else {
             return new ArrayList<SelectItem>();
         }
+    }
+    public String getFileParentFolderGUIDByDDocName(String dDocName){
+        try{
+            Folderfiles file = this.webCCServiceFacade.getFolderfilesByDDocName(dDocName);    
+            if(file!= null)
+                return file.getFparentguid();
+
+        }catch (Exception e){
+            logger.error("Error al obtener el parentGUID del documento con dDocName :"+dDocName);
+            return null;
+        }
+        return null;
     }
 }
 

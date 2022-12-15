@@ -235,4 +235,10 @@ public class WebCCServiceFacade {
                  .setParameter("param", key)
                  .getResultList();
     }
+
+    public Folderfiles getFolderfilesByDDocName(String dDocName) {
+        return em.createNamedQuery("Folderfiles.findByDDocName", Folderfiles.class)
+                 .setParameter("param", dDocName)
+                 .getSingleResult();
+    }
 }

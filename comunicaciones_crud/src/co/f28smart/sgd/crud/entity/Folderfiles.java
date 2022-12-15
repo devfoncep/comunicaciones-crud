@@ -13,9 +13,11 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQueries({ @NamedQuery(name = "Folderfiles.findAll", query = "select o from Folderfiles o") })
+@NamedQueries({ @NamedQuery(name = "Folderfiles.findAll", query = "select o from Folderfiles o"),
+                @NamedQuery(name = "Folderfiles.findByDDocName", query = "select o from Folderfiles o where o.ddocname = :param ")})
 public class Folderfiles implements Serializable {
-    private static final long serialVersionUID = 1965112568148788514L;
+    @SuppressWarnings("compatibility:-1552762024737951914")
+    private static final long serialVersionUID = 1L;
     @Column(length = 100)
     private String ddocname;
     private BigDecimal dpublishedrevisionid;
