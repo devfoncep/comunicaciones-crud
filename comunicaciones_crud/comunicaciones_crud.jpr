@@ -210,11 +210,11 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Log4j-1.2.16.jar"/>
+            <value n="id" v="JPS Designtime"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="JPS Designtime"/>
+            <value n="id" v="Log4j-1.2.16.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>
@@ -281,11 +281,11 @@
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="Log4j-1.2.16.jar"/>
+            <value n="id" v="JPS Designtime"/>
             <value n="isJDK" v="false"/>
          </hash>
          <hash>
-            <value n="id" v="JPS Designtime"/>
+            <value n="id" v="Log4j-1.2.16.jar"/>
             <value n="isJDK" v="false"/>
          </hash>
       </list>

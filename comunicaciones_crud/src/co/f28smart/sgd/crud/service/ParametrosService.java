@@ -1,6 +1,5 @@
 package co.f28smart.sgd.crud.service;
 
-
 import co.f28smart.sgd.crud.entity.Folderfiles;
 import co.f28smart.sgd.crud.entity.Folderfolders;
 import co.f28smart.sgd.crud.entity.Requisito;
@@ -31,6 +30,7 @@ public class ParametrosService {
     private Logger logger;
 
     private String ROOTFFOLDERGUID = "E26ECFA5F5CEC2EE3888DE55739BE9F4";
+    private String FONDO_DOCUMENTAL_ID = "1";
 
     private List<SelectItem> tipoTramites = new ArrayList<>();
     private List<SelectItem> tipoEnvios = new ArrayList<>();
@@ -86,12 +86,16 @@ public class ParametrosService {
         }
 
         Object o = ridcProperties.get("ROOTFFOLDERGUID");
-        if (o != null) {
-            logger.debug("ROOTFFOLDERGUID :" + o);
-            loadCategorias(o.toString());
-        } else {
-            loadCategorias(ROOTFFOLDERGUID);
-        }
+        logger.debug("properties.ROOTFFOLDERGUID :" + o);
+        if (o != null)
+            this.ROOTFFOLDERGUID = o.toString();
+        
+    
+        loadCategorias(ROOTFFOLDERGUID);
+
+        Object fdid = ridcProperties.get("FONDODOCUMENTALID");       
+        if(fdid!= null)
+            this.FONDO_DOCUMENTAL_ID = fdid.toString();
 
         loadTipoTramites();
         loadTipoEnvios();
@@ -302,6 +306,19 @@ public class ParametrosService {
                                              .stream()
                                              .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
                                              .collect(Collectors.toList());*/
+    }
+    
+    public List<SelectItem> getSubFolders(String fParentGUID) {
+        List<SelectItem> subFolders;
+        subFolders = new ArrayList<>();
+        for (Folderfolders folder : webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)) {
+            subFolders.add(new SelectItem(folder.getFfolderguid(), folder.getFfoldername()));
+        }
+        /*this.subseries = webCCServiceFacade.getFolderfoldersFindByParent(fParentGUID)
+                                           .stream()
+                                           .map(p -> new SelectItem(p.getFfolderguid(), p.getFfoldername()))
+                                           .collect(Collectors.toList());*/
+        return subFolders;
     }
 
     private void loadTipoIdentificacion() {
@@ -637,6 +654,14 @@ public class ParametrosService {
         return ROOTFFOLDERGUID;
     }
 
+
+    public void setFONDO_DOCUMENTAL_ID(String FONDO_DOCUMENTAL_ID) {
+        this.FONDO_DOCUMENTAL_ID = FONDO_DOCUMENTAL_ID;
+    }
+
+    public String getFONDO_DOCUMENTAL_ID() {
+        return FONDO_DOCUMENTAL_ID;
+    }
 
     public String findLabel(Object value, List<SelectItem> itemList) {
         String label = "";
