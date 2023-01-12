@@ -16,7 +16,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({ @NamedQuery(name = "SgdRemitente.findAll", query = "select o from SgdRemitente o"),
                 @NamedQuery(name = "SgdRemitente.findByIdName",
                             query =
-                            "select o from SgdRemitente o where lower(o.nombreCompleto) like :nombre or o.noIdentificacion = :id order by o.nombreCompleto asc")
+                            "select o from SgdRemitente o where lower(o.nombreCompleto) like :nombre or o.noIdentificacion like :id order by o.nombreCompleto asc")
     })
 @Table(name = "SGD_REMITENTE")
 public class SgdRemitente implements Serializable {

@@ -645,12 +645,14 @@ public class ComunicacionesServiceFacade {
 
     public List<SgdRemitente> getSgdRemitenteFindByIdNombre(String id, String nombre) {
         String parsedString = "";
+        String parsedId = "";
         if (nombre != null && !nombre.isEmpty()) {
             parsedString = "%" + nombre.toLowerCase().replace(' ', '%') + "%";
+            parsedId = "%"+id+"%";
         }
         return em.createNamedQuery("SgdRemitente.findByIdName", SgdRemitente.class)
                  .setParameter("nombre", parsedString)
-                 .setParameter("id", id)
+                 .setParameter("id", parsedId)
                  .getResultList();
     }
 
