@@ -47,10 +47,14 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import org.apache.log4j.Logger;
+
 public class ComunicacionesServiceFacade {
     private final EntityManager em;
+    private Logger logger;
 
     public ComunicacionesServiceFacade() {
+        logger = Logger.getLogger(this.getClass().getSimpleName());
         final EntityManagerFactory emf = Persistence.createEntityManagerFactory("comunicacionesPU");
         em = emf.createEntityManager();
     }
@@ -644,12 +648,15 @@ public class ComunicacionesServiceFacade {
     }
 
     public List<SgdRemitente> getSgdRemitenteFindByIdNombre(String id, String nombre) {
-        String parsedString = "";
-        String parsedId = "";
-        if (nombre != null && !nombre.isEmpty()) {
-            parsedString = "%" + nombre.toLowerCase().replace(' ', '%') + "%";
-            parsedId = "%"+id+"%";
-        }
+        String parsedString = "%";
+        String parsedId = "%";
+        if (nombre != null && !nombre.isEmpty()) 
+            parsedString = parsedString+nombre.toLowerCase().replace(' ', '%') + "%";
+            
+        if(id != null && !id.isEmpty())
+                parsedId = parsedId+id+"%";
+        
+        logger.debug("Searching for nombre :"+parsedString+" and id :"+parsedId);
         return em.createNamedQuery("SgdRemitente.findByIdName", SgdRemitente.class)
                  .setParameter("nombre", parsedString)
                  .setParameter("id", parsedId)
