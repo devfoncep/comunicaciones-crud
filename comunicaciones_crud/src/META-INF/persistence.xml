@@ -5,6 +5,8 @@
     <persistence-unit name="comunicacionesPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/ComunicacionesDS</jta-data-source>
+        <class>co.f28smart.sgd.crud.entity.sisla.DatosOficRemisCpSigef</class>
+        <class>co.f28smart.sgd.crud.entity.sisla.CuentaCobroCp2017</class>
         <class>co.f28smart.sgd.crud.entity.SgdUsuario</class>
         <class>co.f28smart.sgd.crud.entity.SgdInteresado</class>
         <class>co.f28smart.sgd.crud.entity.SgdRemitente</class>
@@ -60,7 +62,8 @@
         <class>co.f28smart.sgd.crud.entity.FoncepTbSeriedocumental</class>
         <class>co.f28smart.sgd.crud.entity.FoncepTbSubserie</class>
         <class>co.f28smart.sgd.crud.entity.FoncepTbTipodocumental</class>
-        <class>co.f28smart.sgd.crud.entity.FoncepTbUnidadproductora</class><properties>
+        <class>co.f28smart.sgd.crud.entity.FoncepTbUnidadproductora</class>
+        <properties>
             <property name="eclipselink.target-server" value="WebLogic_10"/>
             <property name="javax.persistence.jtaDataSource" value="jdbc/wcc-cs-ds"/>
         </properties>

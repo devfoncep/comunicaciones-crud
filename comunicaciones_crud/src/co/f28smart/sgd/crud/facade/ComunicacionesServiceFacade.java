@@ -1,5 +1,6 @@
 package co.f28smart.sgd.crud.facade;
 
+import co.f28smart.sgd.crud.dto.DestinatarioCuentaCobro;
 import co.f28smart.sgd.crud.entity.SgdAccionRespuesta;
 import co.f28smart.sgd.crud.entity.SgdAnexoComunicacion;
 import co.f28smart.sgd.crud.entity.SgdCategoriaTipo;
@@ -39,6 +40,8 @@ import co.f28smart.sgd.crud.entity.SgdUsuarioRol;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -707,5 +710,18 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdTipoReqTramite.findByTipoTramite", SgdTipoReqTramite.class)
                  .setParameter("idTipoTramite", idTipoTramite)
                  .getResultList();
+    }
+    public List<DestinatarioCuentaCobro> getDestinatariosCuentaCobroByFase1(){
+        List<DestinatarioCuentaCobro> destinatarios = new ArrayList<>();
+        destinatarios = em.createNamedQuery("DatosOficRemisCpSigef.findAllInFase1", DestinatarioCuentaCobro.class).getResultList();
+        return destinatarios;
+    }
+    public List<DestinatarioCuentaCobro> getDestinatariosCuentaCobroByDates(Date initDate, Date endDate){
+        List<DestinatarioCuentaCobro> destinatarios = new ArrayList<>();
+        destinatarios = em.createNamedQuery("DatosOficRemisCpSigef.findAllbyDates", DestinatarioCuentaCobro.class)
+                          .setParameter("initDate", initDate)
+                          .setParameter("endDate", endDate)
+                          .getResultList();
+        return destinatarios;
     }
 }
