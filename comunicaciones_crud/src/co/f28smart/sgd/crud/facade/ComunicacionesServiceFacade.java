@@ -7,6 +7,7 @@ import co.f28smart.sgd.crud.entity.SgdCategoriaTipo;
 import co.f28smart.sgd.crud.entity.SgdComunicacion;
 import co.f28smart.sgd.crud.entity.SgdComunicacionPrqsAud;
 import co.f28smart.sgd.crud.entity.SgdComunicacionesView;
+import co.f28smart.sgd.crud.entity.SgdDepTipocomintSeq;
 import co.f28smart.sgd.crud.entity.SgdDepartamento;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
 import co.f28smart.sgd.crud.entity.SgdEtnia;
@@ -723,5 +724,19 @@ public class ComunicacionesServiceFacade {
                           .setParameter("endDate", endDate)
                           .getResultList();
         return destinatarios;
+    }
+    public List<SgdDependencia> getDependenciasActosAdminByCodDepAndIdTipoComInt(Integer codigoDependencia,Integer idTipoComInterna){
+        List<SgdDependencia> dependencias = new ArrayList<>();
+        dependencias = em.createNamedQuery("SgdDepTipocomintSeq.findCodDepAndIdTipoComInt", SgdDependencia.class)
+            .setParameter("codigoDependencia", codigoDependencia)
+            .setParameter("idTipoComInterna", idTipoComInterna)
+            .getResultList();
+        return dependencias; 
+    }
+    
+    public List<SgdPlantilla> getPlantillasByIdTipoComunicacion(Integer idTipoComunicacion){
+        return em.createNamedQuery("SgdPlantilla.findByIdTipoCom", SgdPlantilla.class)
+                 .setParameter("idTipoComunicacion", idTipoComunicacion)
+                 .getResultList();
     }
 }

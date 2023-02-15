@@ -796,6 +796,12 @@ public class ParametrosService {
         }
         return null;
     }
+    
+    public List<SelectItem> getDependenciasActosAdmin(Integer codigoDependencia,Integer idTipoComInterna){
+        return comunicacionesService.getDependenciasActosAdminByCodDepAndIdTipoComInt(codigoDependencia, idTipoComInterna)
+                                   .stream().map(d -> new SelectItem(d.getCodigoDependencia(), d.getDependencia()))
+                                   .collect(Collectors.toList());
+    }
 }
 
 

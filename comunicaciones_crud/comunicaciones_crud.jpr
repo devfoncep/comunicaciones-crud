@@ -77,6 +77,7 @@
    </list>
    <value n="defaultPackage" v="co.gov.ica"/>
    <hash n="ejbModuleContainer">
+      <value n="dbConnection" v="ComunicacionesDS"/>
       <value n="ejbMetaDataPrefs" v="PREFASANNON"/>
       <value n="ejbVersion" v="3.0"/>
       <list n="serviceFacadeUrls">

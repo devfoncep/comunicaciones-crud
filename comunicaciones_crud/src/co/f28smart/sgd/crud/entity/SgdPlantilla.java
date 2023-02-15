@@ -8,6 +8,7 @@ import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -16,10 +17,14 @@ import javax.persistence.TemporalType;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "SgdPlantilla.findAll", query = "select o from SgdPlantilla o") })
+@NamedQueries({ @NamedQuery(name = "SgdPlantilla.findAll", query = "select o from SgdPlantilla o"),
+                @NamedQuery(name = "SgdPlantilla.findByIdTipoCom", 
+                            query = "select o from SgdPlantilla o where o.idTipoComunicacion = :idTipoComunicacion")})
 @Table(name = "SGD_PLANTILLA")
 public class SgdPlantilla implements Serializable {
-    private static final long serialVersionUID = -615758058844374322L;
+    @SuppressWarnings("compatibility:-5118871809529840640")
+    private static final long serialVersionUID = 1L;
+
     @Temporal(TemporalType.DATE)
     @Column(name = "FECHA_CREACION")
     private Date fechaCreacion;
@@ -43,7 +48,14 @@ public class SgdPlantilla implements Serializable {
     private String usuarioCreacion;
     @Column(name = "USUARIO_MODIFICACION", length = 50)
     private String usuarioModificacion;
+    @Column(name = "VIGENTE")
     private Integer vigente;
+    @Column(name = "ID_TIPO_COMUNICACION")
+    private Integer idTipoComunicacion;
+    @Lob
+    @Column(name = "ARCHIVO")
+    private byte[] archivo;
+    
 
     public SgdPlantilla() {
     }
@@ -150,5 +162,21 @@ public class SgdPlantilla implements Serializable {
 
     public void setVigente(Integer vigente) {
         this.vigente = vigente;
+    }
+
+    public void setIdTipoComunicacion(Integer idTipoComunicacion) {
+        this.idTipoComunicacion = idTipoComunicacion;
+    }
+
+    public Integer getIdTipoComunicacion() {
+        return idTipoComunicacion;
+    }
+
+    public void setArchivo(byte[] archivo) {
+        this.archivo = archivo;
+    }
+
+    public byte[] getArchivo() {
+        return archivo;
     }
 }
