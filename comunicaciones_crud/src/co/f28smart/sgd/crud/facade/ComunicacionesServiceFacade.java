@@ -725,10 +725,9 @@ public class ComunicacionesServiceFacade {
                           .getResultList();
         return destinatarios;
     }
-    public List<SgdDependencia> getDependenciasActosAdminByCodDepAndIdTipoComInt(Integer codigoDependencia,Integer idTipoComInterna){
+    public List<SgdDependencia> getDependenciasActosAdminByCodDepAndIdTipoComInt(Integer idTipoComInterna){
         List<SgdDependencia> dependencias = new ArrayList<>();
-        dependencias = em.createNamedQuery("SgdDepTipocomintSeq.findCodDepAndIdTipoComInt", SgdDependencia.class)
-            .setParameter("codigoDependencia", codigoDependencia)
+        dependencias = em.createNamedQuery("SgdDepTipocomintSeq.findByIdTipoComInt", SgdDependencia.class)
             .setParameter("idTipoComInterna", idTipoComInterna)
             .getResultList();
         return dependencias; 

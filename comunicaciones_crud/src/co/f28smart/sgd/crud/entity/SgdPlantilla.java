@@ -179,4 +179,23 @@ public class SgdPlantilla implements Serializable {
     public byte[] getArchivo() {
         return archivo;
     }
+
+
+    @Override
+    public String toString() {
+        return super.toString ()
+        +"fechaCreacion :"+fechaCreacion+","
+        +"fechaModificacion :"+fechaModificacion+","
+        +"idSgdPlantilla :"+idSgdPlantilla+","
+        +"ipCreacion :"+ipCreacion+","
+        +"ipModificacion :"+ipModificacion+","
+        +"nombre :"+nombre+","
+        +"parametroReemplazo :"+parametroReemplazo+","
+        +"ruta :"+ruta+","
+        +"usuarioCreacion :"+usuarioCreacion+","
+        +"usuarioModificacion :"+usuarioModificacion+","
+        +"vigente :"+vigente+","
+        +"idTipoComunicacion :"+idTipoComunicacion+","
+        +"archivo :"+archivo+"}";
+    }
 }

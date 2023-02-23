@@ -797,8 +797,8 @@ public class ParametrosService {
         return null;
     }
     
-    public List<SelectItem> getDependenciasActosAdmin(Integer codigoDependencia,Integer idTipoComInterna){
-        return comunicacionesService.getDependenciasActosAdminByCodDepAndIdTipoComInt(codigoDependencia, idTipoComInterna)
+    public List<SelectItem> getDependenciasActosAdmin(Integer idTipoComInterna){
+        return comunicacionesService.getDependenciasActosAdminByCodDepAndIdTipoComInt(idTipoComInterna)
                                    .stream().map(d -> new SelectItem(d.getCodigoDependencia(), d.getDependencia()))
                                    .collect(Collectors.toList());
     }

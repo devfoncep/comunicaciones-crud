@@ -13,11 +13,12 @@ import javax.persistence.Table;
 
 @Entity
 @NamedQueries({ @NamedQuery(name = "SgdDepTipocomintSeq.findAll", query = "select o from SgdDepTipocomintSeq o"),
-                @NamedQuery(name = "SgdDepTipocomintSeq.findCodDepAndIdTipoComInt", 
+                @NamedQuery(name = "SgdDepTipocomintSeq.findByIdTipoComInt", 
                             query = "select d from SgdDepTipocomintSeq o " +
                                     "inner join SgdDependencia d " +
                                     "on d.codigoDependencia = o.codigoDependencia " +
-                                    "where o.codigoDependencia = :codigoDependencia and o.idTipoComInterna = :idTipoComInterna")})
+                                    "where o.idTipoComInterna = :idTipoComInterna"),
+                })
 @Table(name = "SGD_DEP_TIPOCOMINT_SEQ")
 public class SgdDepTipocomintSeq implements Serializable {
     @SuppressWarnings("compatibility:3299838484804833996")
