@@ -446,7 +446,7 @@ public class ParametrosService {
             tiposCanal.add(new SelectItem(3, "Mail"));
             tiposCanal.add(new SelectItem(4, "Pagina Web"));
             tiposCanal.add(new SelectItem(5, "Redes Sociales"));
-            tiposCanal.add(new SelectItem(6, "Telefonico"));
+            tiposCanal.add(new SelectItem(6, "Telefónico"));
         }
         return tiposCanal;
     }
