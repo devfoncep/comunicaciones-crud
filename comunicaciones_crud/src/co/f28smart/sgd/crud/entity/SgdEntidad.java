@@ -64,6 +64,7 @@ public class SgdEntidad implements Serializable {
     private String website;
 
 
+
     public SgdEntidad() {
     }
 

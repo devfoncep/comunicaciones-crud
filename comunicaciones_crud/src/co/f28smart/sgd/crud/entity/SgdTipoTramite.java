@@ -35,6 +35,8 @@ public class SgdTipoTramite implements Serializable {
     private Integer diasRespuesta;
     @Column(name="ACTIVO")
     private Integer activo;
+    @Column(name = "ES_PENSIONAL")
+    private boolean esPensional;
     
     
 
@@ -95,5 +97,13 @@ public class SgdTipoTramite implements Serializable {
 
     public Integer getActivo() {
         return activo;
+    }
+
+    public void setEsPensional(boolean esPensional) {
+        this.esPensional = esPensional;
+    }
+
+    public boolean isEsPensional() {
+        return esPensional;
     }
 }

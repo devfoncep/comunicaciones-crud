@@ -65,6 +65,14 @@ public class SgdRemitente implements Serializable {
     private String usuarioCreacion;
     @Column(name = "NIT_ENTIDAD")
     private Long nitEntidad;
+    @Column(name = "PRIMER_NOMBRE")
+    private String primerNombre;
+    @Column(name = "SEGUNDO_NOMBRE")
+    private String segundoNombre;
+    @Column(name = "PRIMER_APELLIDO")
+    private String primerApellido;
+    @Column(name = "SEGUNDO_APELLIDO")
+    private String segundoApellido;
 
     public SgdRemitente() {
     }
@@ -258,6 +266,39 @@ public class SgdRemitente implements Serializable {
 
     public Long getNitEntidad() {
         return nitEntidad;
+    }
+
+
+    public void setPrimerNombre(String primerNombre) {
+        this.primerNombre = primerNombre;
+    }
+
+    public String getPrimerNombre() {
+        return primerNombre;
+    }
+
+    public void setSegundoNombre(String segundoNombre) {
+        this.segundoNombre = segundoNombre;
+    }
+
+    public String getSegundoNombre() {
+        return segundoNombre;
+    }
+
+    public void setPrimerApellido(String primerApellido) {
+        this.primerApellido = primerApellido;
+    }
+
+    public String getPrimerApellido() {
+        return primerApellido;
+    }
+
+    public void setSegundoApellido(String segundoApellido) {
+        this.segundoApellido = segundoApellido;
+    }
+
+    public String getSegundoApellido() {
+        return segundoApellido;
     }
 
     @Override

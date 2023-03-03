@@ -2,6 +2,7 @@ package co.f28smart.sgd.crud.service;
 
 import co.f28smart.sgd.crud.entity.Folderfiles;
 import co.f28smart.sgd.crud.entity.Folderfolders;
+import co.f28smart.sgd.crud.entity.FrameworkFoldersMetaDefaults;
 import co.f28smart.sgd.crud.entity.Requisito;
 import co.f28smart.sgd.crud.entity.SgdEntidad;
 import co.f28smart.sgd.crud.entity.SgdPais;
@@ -18,6 +19,7 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -801,6 +803,13 @@ public class ParametrosService {
         return comunicacionesService.getDependenciasActosAdminByCodDepAndIdTipoComInt(idTipoComInterna)
                                    .stream().map(d -> new SelectItem(d.getCodigoDependencia(), d.getDependencia()))
                                    .collect(Collectors.toList());
+    }
+    
+    public Map<String,String> getMetaDefaultByFfolderguidAnd(String ffolderguid, List<String> ffieldnames){
+        return comunicacionesService.getMetaDefaultsByFFolderGuid(ffolderguid)
+                                    .stream()
+                                    .filter(m -> ffieldnames.contains(m.getFfieldname()))
+                                    .collect(Collectors.toMap(FrameworkFoldersMetaDefaults::getFfieldname, FrameworkFoldersMetaDefaults::getFfieldvalue));
     }
 }
 

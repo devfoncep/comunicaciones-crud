@@ -1,6 +1,7 @@
 package co.f28smart.sgd.crud.facade;
 
 import co.f28smart.sgd.crud.dto.DestinatarioCuentaCobro;
+import co.f28smart.sgd.crud.entity.FrameworkFoldersMetaDefaults;
 import co.f28smart.sgd.crud.entity.SgdAccionRespuesta;
 import co.f28smart.sgd.crud.entity.SgdAnexoComunicacion;
 import co.f28smart.sgd.crud.entity.SgdCategoriaTipo;
@@ -737,5 +738,11 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdPlantilla.findByIdTipoCom", SgdPlantilla.class)
                  .setParameter("idTipoComunicacion", idTipoComunicacion)
                  .getResultList();
+    }
+    public List<FrameworkFoldersMetaDefaults> getMetaDefaultsByFFolderGuid(String ffolderguid){
+        return em.createNamedQuery("FrameworkFoldersMetaDefaults.findByFfolderguid", FrameworkFoldersMetaDefaults.class)
+                 .setParameter("ffolderguid", ffolderguid)
+                 .getResultList();
+        
     }
 }
