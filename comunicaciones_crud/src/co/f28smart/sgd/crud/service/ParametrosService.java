@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -806,10 +807,25 @@ public class ParametrosService {
     }
     
     public Map<String,String> getMetaDefaultByFfolderguidAnd(String ffolderguid, List<String> ffieldnames){
-        return comunicacionesService.getMetaDefaultsByFFolderGuid(ffolderguid)
+        logger.info("ffolderguid : "+ffolderguid );
+        
+        try{
+            List<FrameworkFoldersMetaDefaults> frameworFolderMetaDefault 
+                = comunicacionesService.getMetaDefaultsByFFolderGuid(ffolderguid);
+            logger.info("meta defaults :");
+            frameworFolderMetaDefault.stream()
+                                     .filter(m -> ffieldnames.contains(m.getFfieldname()))
+                                     .collect(Collectors.toList())
+                                     .forEach(f -> logger.info(f.getFfieldname()+" :"+f.getFfieldvalue())); 
+            return frameworFolderMetaDefault
                                     .stream()
                                     .filter(m -> ffieldnames.contains(m.getFfieldname()))
                                     .collect(Collectors.toMap(FrameworkFoldersMetaDefaults::getFfieldname, FrameworkFoldersMetaDefaults::getFfieldvalue));
+        }catch (Exception e){
+            logger.error("Error al obtener los metadatos por defecto del folder : "+ffolderguid+ " para los campos :"+ffieldnames.stream().collect(Collectors.joining(",")), e);
+            return new HashMap<String, String>();
+        }
+    
     }
 }
 
