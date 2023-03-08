@@ -64,6 +64,7 @@ public class ParametrosService {
     private List<SelectItem> lstBarrio = new ArrayList<>();
     private List<SelectItem> lstIdioma = new ArrayList<>();
     private List<SelectItem> fondosDocumentales = new ArrayList<>();
+    private List<SelectItem> tipoComEntrada = new ArrayList<>();
 
     final ComunicacionesServiceFacade comunicacionesService;
     final WebCCServiceFacade webCCServiceFacade;
@@ -118,6 +119,14 @@ public class ParametrosService {
         loadParentescos();
         loadIdiomas();
         loadFondosDocumentales();
+        loadTipoComEntrada();
+    }
+    
+    private void loadTipoComEntrada() {
+        this.tipoComEntrada = comunicacionesService.getSgdTipoComEntrada()
+                                                   .stream()
+                                                   .map((t) -> new SelectItem(t.getCodigo(),t.getNombre()))
+                                                   .collect(Collectors.toList());
     }
 
     private void loadFondosDocumentales() {
@@ -439,19 +448,16 @@ public class ParametrosService {
     }
 
     public List<SelectItem> getTipoCanalesByTipoCom(String tipoCom) {
-        //F -> Fisica, E -> Electronica
-        if ("F".equals(tipoCom)) {
-            tiposCanal.clear();
-            tiposCanal.add(new SelectItem(1, "Empresa Mensajeria"));
-            tiposCanal.add(new SelectItem(2, "Presencial"));
-        } else {
-            tiposCanal.clear();
-            tiposCanal.add(new SelectItem(3, "Mail"));
-            tiposCanal.add(new SelectItem(4, "Pagina Web"));
-            tiposCanal.add(new SelectItem(5, "Redes Sociales"));
-            tiposCanal.add(new SelectItem(6, "Telefónico"));
+        if(tipoCom!= null)
+            {
+            return comunicacionesService.getSgdTipoCanalEntradabByIdTipoComEntrada(tipoCom)
+                                        .stream()
+                                        .map(c -> new SelectItem(c.getIdTipoCanalEntrada(), c.getNombre()))
+                                        .collect(Collectors.toList());
+        }else{
+            return new ArrayList<SelectItem>();
         }
-        return tiposCanal;
+
     }
 
     public List<SelectItem> getLocalidades() {
@@ -827,6 +833,17 @@ public class ParametrosService {
         }
     
     }
+
+
+    public void setTipoComEntrada(List<SelectItem> tipoComEntrada) {
+        this.tipoComEntrada = tipoComEntrada;
+    }
+
+    public List<SelectItem> getTipoComEntrada() {
+        return tipoComEntrada;
+    }
+
+
 }
 
 

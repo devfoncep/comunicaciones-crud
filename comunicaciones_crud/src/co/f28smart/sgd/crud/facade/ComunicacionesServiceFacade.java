@@ -28,6 +28,8 @@ import co.f28smart.sgd.crud.entity.SgdGruposValor;
 import co.f28smart.sgd.crud.entity.SgdIdiomaCom;
 import co.f28smart.sgd.crud.entity.SgdParentesco;
 import co.f28smart.sgd.crud.entity.SgdTipoAnexoFisico;
+import co.f28smart.sgd.crud.entity.SgdTipoCanalEntrada;
+import co.f28smart.sgd.crud.entity.SgdTipoComEntrada;
 import co.f28smart.sgd.crud.entity.SgdTipoComInterna;
 import co.f28smart.sgd.crud.entity.SgdTipoEmpresa;
 import co.f28smart.sgd.crud.entity.SgdTipoEnvio;
@@ -744,5 +746,14 @@ public class ComunicacionesServiceFacade {
                  .setParameter("ffolderguid", ffolderguid)
                  .getResultList();
         
+    }
+    public List<SgdTipoComEntrada> getSgdTipoComEntrada(){
+        return em.createNamedQuery("SgdTipoComEntrada.findAll", SgdTipoComEntrada.class)
+                 .getResultList();
+    }
+    public List<SgdTipoCanalEntrada> getSgdTipoCanalEntradabByIdTipoComEntrada(String codigo){
+        return em.createNamedQuery("SgdTipoCanalEntrada.findByCodigoTipoComEntrada",SgdTipoCanalEntrada.class)
+                 .setParameter("codigo", codigo)
+                 .getResultList();
     }
 }
