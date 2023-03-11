@@ -1,6 +1,8 @@
 package co.f28smart.sgd.crud.facade;
 
 import co.f28smart.sgd.crud.dto.DestinatarioCuentaCobro;
+import co.f28smart.sgd.crud.entity.FoncepTbSeriedocumental;
+import co.f28smart.sgd.crud.entity.FoncepTbSubserie;
 import co.f28smart.sgd.crud.entity.FrameworkFoldersMetaDefaults;
 import co.f28smart.sgd.crud.entity.SgdAccionRespuesta;
 import co.f28smart.sgd.crud.entity.SgdAnexoComunicacion;
@@ -755,5 +757,15 @@ public class ComunicacionesServiceFacade {
         return em.createNamedQuery("SgdTipoCanalEntrada.findByCodigoTipoComEntrada",SgdTipoCanalEntrada.class)
                  .setParameter("codigo", codigo)
                  .getResultList();
+    }
+    public FoncepTbSeriedocumental getFoncepTbSeriedocumentalById(Integer id) {
+        return em.createNamedQuery("FoncepTbSeriedocumental.findById", FoncepTbSeriedocumental.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
+    }
+    public FoncepTbSubserie getFoncepTbSubserieById(Integer id) {
+        return em.createNamedQuery("FoncepTbSubserie.findById", FoncepTbSubserie.class)
+                 .setParameter("param", id)
+                 .getSingleResult();
     }
 }
