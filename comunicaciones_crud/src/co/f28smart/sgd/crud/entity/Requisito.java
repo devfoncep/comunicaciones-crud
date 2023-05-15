@@ -1,8 +1,12 @@
 package co.f28smart.sgd.crud.entity;
 
+import java.io.Serializable;
+
 import java.util.Objects;
 
-public class Requisito {
+public class Requisito implements Serializable{
+    @SuppressWarnings("compatibility:1768570552640283876")
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String requisito;
     private boolean cumple;

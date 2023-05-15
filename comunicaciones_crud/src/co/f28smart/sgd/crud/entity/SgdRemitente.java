@@ -2,6 +2,8 @@ package co.f28smart.sgd.crud.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
+@Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdRemitente.findAll", query = "select o from SgdRemitente o"),
                 @NamedQuery(name = "SgdRemitente.findByIdName",
                             query =

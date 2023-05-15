@@ -12,7 +12,8 @@ import javax.persistence.Table;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "SgdRolUsuarioDep.findAll", query = "select o from SgdRolUsuarioDep o")})
+@NamedQueries({ @NamedQuery(name = "SgdRolUsuarioDep.findAll", query = "select o from SgdRolUsuarioDep o"),
+                @NamedQuery(name = "SgdRolUsuarioDep.findByUserAndIdRol", query = "select o from SgdRolUsuarioDep o where o.idUsuario = :idUsuario and o.idRol = :idRol")})
 @Table(name = "SGD_ROL_USUARIO_DEP")
 @SuppressWarnings("oracle.jdeveloper.ejb.entity-class-auto-id-gen")
 public class SgdRolUsuarioDep  implements Serializable {

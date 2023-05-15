@@ -3,6 +3,8 @@ package co.f28smart.sgd.crud.entity;
 import java.io.Serializable;
 
 import java.util.Date;
+
+import javax.persistence.Cacheable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,6 +15,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
+@Cacheable(false)
 @NamedQueries({ @NamedQuery(name = "SgdEntidad.findAll", query = "select o from SgdEntidad o"),
                 @NamedQuery(name = "SgdEntidad.findByNameNit", query = "select o from SgdEntidad o where o.idEntidad = :nit or lower(o.nombre) like :nombre order by o.nombre asc"),
                 @NamedQuery(name = "SgdEntidad.findById", query = "select o from SgdEntidad o where o.idEntidad = :id")})
@@ -249,7 +252,7 @@ public class SgdEntidad implements Serializable {
 
     @Override
     public String toString() {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         buffer.append(getClass().getName() + "@" + Integer.toHexString(hashCode()));
         buffer.append('[');
         buffer.append("apartadoAereo=");

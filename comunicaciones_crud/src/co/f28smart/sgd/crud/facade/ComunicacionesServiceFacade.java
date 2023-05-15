@@ -768,4 +768,10 @@ public class ComunicacionesServiceFacade {
                  .setParameter("param", id)
                  .getSingleResult();
     }
+    public List<SgdUsuarioRol> getSgdUsuarioRolByUserAndIdRol(Integer idRol, String idUsuario){
+        return em.createNamedQuery("SgdRolUsuarioDep.findByUserAndIdRol", SgdUsuarioRol.class)
+                 .setParameter("idUsuario", idUsuario)
+                 .setParameter("idRol", idRol)
+                 .getResultList();
+    }
 }
