@@ -15,15 +15,15 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @Cacheable(false)
-@NamedQueries({ @NamedQuery(name = "Folderfolders.findAll", query = "select o from Folderfolders o  order by o.ffoldername asc"),
+@NamedQueries({ @NamedQuery(name = "Folderfolders.findAll", query = "select o from Folderfolders o order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findRoot",
-                            query = "select o from Folderfolders o where o.fparentguid = 'FLD_ENTERPRISE_LIBRARY'  order by o.ffoldername asc"),
+                            query = "select o from Folderfolders o where o.fisreadonly = 0 and o.fparentguid = 'FLD_ENTERPRISE_LIBRARY'  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findRootByFolderGUID",
-                            query = "select o from Folderfolders o where o.ffolderguid = :param  order by o.ffoldername asc"),
+                            query = "select o from Folderfolders o where o.fisreadonly = 0 and o.ffolderguid = :param  order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findByParent",
-                            query = "select o from Folderfolders o where o.fparentguid = :param order by o.ffoldername asc"),
+                            query = "select o from Folderfolders o where o.fisreadonly = 0 and o.fparentguid = :param order by o.ffoldername asc"),
                 @NamedQuery(name = "Folderfolders.findByFfolderguid",
-                            query = "select o from Folderfolders o where o.ffolderguid = :param order by o.ffoldername asc")
+                            query = "select o from Folderfolders o where o.fisreadonly = 0 and o.ffolderguid = :param order by o.ffoldername asc")
     })
 public class Folderfolders implements Serializable {
     @SuppressWarnings("compatibility:1508485305770897797")
