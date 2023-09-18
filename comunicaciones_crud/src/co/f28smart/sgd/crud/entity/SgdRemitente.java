@@ -23,7 +23,7 @@ import javax.persistence.TemporalType;
     })
 @Table(name = "SGD_REMITENTE")
 public class SgdRemitente implements Serializable {
-    @SuppressWarnings("compatibility:3055226622659022595")
+    @SuppressWarnings("compatibility:3822855962186234247")
     private static final long serialVersionUID = 1L;
     @Column(length = 20)
     private String cargo;
@@ -76,6 +76,13 @@ public class SgdRemitente implements Serializable {
     private String primerApellido;
     @Column(name = "SEGUNDO_APELLIDO")
     private String segundoApellido;
+    
+    @Column(name = "UPZ")
+    private String upz;
+    @Column(name = "LOCALIDAD")
+    private String localidad;
+    @Column(name = "BARRIO")
+    private String barrio;
 
     public SgdRemitente() {
     }
@@ -302,6 +309,31 @@ public class SgdRemitente implements Serializable {
 
     public String getSegundoApellido() {
         return segundoApellido;
+    }
+
+
+    public void setUpz(String upz) {
+        this.upz = upz;
+    }
+
+    public String getUpz() {
+        return upz;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setBarrio(String barrio) {
+        this.barrio = barrio;
+    }
+
+    public String getBarrio() {
+        return barrio;
     }
 
     @Override

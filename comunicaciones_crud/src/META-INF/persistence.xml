@@ -5,7 +5,7 @@
     <persistence-unit name="comunicacionesPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/ComunicacionesDS</jta-data-source>
-                <class>co.f28smart.sgd.crud.entity.SgdDepTipocomintSeq</class>
+        <class>co.f28smart.sgd.crud.entity.SgdDepTipocomintSeq</class>
         <class>co.f28smart.sgd.crud.entity.sisla.DatosOficRemisCpSigef</class>
         <class>co.f28smart.sgd.crud.entity.sisla.CuentaCobroCp2017</class>
         <class>co.f28smart.sgd.crud.entity.SgdUsuario</class>
